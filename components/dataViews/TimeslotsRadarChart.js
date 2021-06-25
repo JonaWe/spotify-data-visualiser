@@ -21,7 +21,7 @@ export default function TimeslotsRadarChart({ rawData }) {
           <PolarAngleAxis dataKey="timeslot" />
           <PolarRadiusAxis />
           <Radar
-            name="Total Time Spent"
+            name="Hours spent listening"
             dataKey="totalTimeSpent"
             stroke="#8884d8"
             fill="#8884d8"
