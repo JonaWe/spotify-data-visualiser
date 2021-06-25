@@ -12,7 +12,6 @@ import { getTimeslots } from '../lib/processRawData';
 
 export default function WeekdaysRadarChart({ rawData }) {
   const data_timeslots = getTimeslots(rawData);
-  console.log(data_timeslots);
 
   return (
     <div style={{ width: '100vw', height: '80vh' }}>

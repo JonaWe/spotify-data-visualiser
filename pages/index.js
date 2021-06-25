@@ -8,7 +8,13 @@ export default function Home() {
   const [history, setHistory] = useState([]);
   const [fileTransferComplete, setFileTransferComplete] = useState(false);
 
+  const processFiles = () => {
+    setFileTransferComplete(true);
+  };
+
   const onDrop = useCallback((acceptedFiles) => {
+    const rawDataList = [];
+
     acceptedFiles.forEach(async (file) => {
       const zip = await JSZip.loadAsync(file);
       zip.forEach(async (relativePath, zipEntry) => {
@@ -16,14 +22,11 @@ export default function Home() {
           // TODO the appending of the list does not work for some reason
           const jsonText = await zipEntry.async('text');
           const historyPart = JSON.parse(jsonText);
-          const newH = history.concat(historyPart);
-          console.log(newH.length);
-          setHistory(newH);
+          rawDataList.push(...historyPart);
+          setHistory(rawDataList);
         }
       });
     });
-    console.log('file transfer complete');
-    setFileTransferComplete(true);
   });
 
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
@@ -34,16 +37,36 @@ export default function Home() {
 
   return (
     <>
-      <p>{history.length}</p>
       {history.length === 0 ? (
-        <div {...getRootProps({ className: 'dropzone' })}>
-          <input {...getInputProps()} />
-          <p>Click or drag 'n' drop to upload a file</p>
-        </div>
+        <>
+          <div {...getRootProps({ className: 'dropzone' })}>
+            <input {...getInputProps()} />
+            <p>Click or drag 'n' drop to upload a file</p>
+          </div>
+        </>
       ) : !fileTransferComplete ? (
-        <h1>Processing</h1>
+        <>
+          <h1>Files loaded</h1>
+          <button onClick={() => processFiles()}>Process</button>
+        </>
       ) : (
-        <WeekdaysRadarChart rawData={history} />
+        <>
+          <p>Total tracks played: {history.length}</p>
+          <p>
+            Total playtime:{' '}
+            {(
+              history
+                .map((data) => {
+                  return data.msPlayed;
+                })
+                .reduce((acc, cur) => cur + acc, 0) /
+              1000 /
+              60 /
+              60
+            ).toFixed(1)}
+          </p>
+          <WeekdaysRadarChart rawData={history} />
+        </>
       )}
     </>
   );
