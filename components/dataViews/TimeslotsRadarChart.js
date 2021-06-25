@@ -8,9 +8,9 @@ import {
   Tooltip,
 } from 'recharts';
 
-import { getTimeslots } from '../lib/processRawData';
+import { getTimeslots } from '../../lib/processRawData';
 
-export default function WeekdaysRadarChart({ rawData }) {
+export default function TimeslotsRadarChart({ rawData }) {
   const data_timeslots = getTimeslots(rawData);
 
   return (

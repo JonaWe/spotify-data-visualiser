@@ -2,7 +2,8 @@ import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import JSZip from 'jszip';
 
-import WeekdaysRadarChart from '../components/WeekdaysRadarChart';
+import TimeslotsRadarChart from '../components/dataViews/TimeslotsRadarChart';
+import WeekdaysRadarChart from '../components/dataViews/WeekdaysRadarChart';
 
 export default function Home() {
   const [history, setHistory] = useState([]);
@@ -19,7 +20,6 @@ export default function Home() {
       const zip = await JSZip.loadAsync(file);
       zip.forEach(async (relativePath, zipEntry) => {
         if (/StreamingHistory[0-9]+.json/.test(zipEntry.name)) {
-          // TODO the appending of the list does not work for some reason
           const jsonText = await zipEntry.async('text');
           const historyPart = JSON.parse(jsonText);
           rawDataList.push(...historyPart);
@@ -65,6 +65,7 @@ export default function Home() {
               60
             ).toFixed(1)}
           </p>
+          <TimeslotsRadarChart rawData={history} />
           <WeekdaysRadarChart rawData={history} />
         </>
       )}
