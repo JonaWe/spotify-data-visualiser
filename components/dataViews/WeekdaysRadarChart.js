@@ -8,15 +8,11 @@ import {
   Tooltip,
 } from 'recharts';
 
-import { getWeekdays } from '../../lib/processRawData';
-
-export default function WeekdaysRadarChart({ rawData }) {
-  const data_timeslots = getWeekdays(rawData);
-
+export default function WeekdaysRadarChart({ data }) {
   return (
     <div style={{ width: '100vw', height: '80vh' }}>
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data_timeslots}>
+        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
           <PolarGrid />
           <PolarAngleAxis dataKey="timeslot" />
           <PolarRadiusAxis axisLine={false} tick={false} />

@@ -5,7 +5,7 @@ import FileUploader from '../components/FileUploader';
 import DataViews from '../components/dataViews';
 
 export default function Home() {
-  const [history, setHistory] = useState([]);
+  const [streamingHistory, setStreamingHistory] = useState([]);
   const [fileTransferComplete, setFileTransferComplete] = useState(false);
 
   return (
@@ -16,12 +16,12 @@ export default function Home() {
         justifyItems: 'center',
       }}
     >
-      {history.length === 0 ? (
-        <FileUploader setHistory={setHistory} />
+      {streamingHistory.length === 0 ? (
+        <FileUploader setStreamingHistory={setStreamingHistory} />
       ) : !fileTransferComplete ? (
         <FileProcessor setFileTransferComplete={setFileTransferComplete} />
       ) : (
-        <DataViews rawData={history} />
+        <DataViews streamingHistory={streamingHistory} />
       )}
     </div>
   );

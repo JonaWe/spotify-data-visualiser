@@ -1,11 +1,12 @@
 import { CountUp } from 'use-count-up';
+import DataProcessor from '../../lib/DataProcessor';
 import TimeslotsRadarChart from './TimeslotsRadarChart';
 import WeekdaysRadarChart from './WeekdaysRadarChart';
 
-export default function dataViews({ rawData }) {
-  const totalTracksPlayed = rawData.length;
+export default function dataViews({ streamingHistory }) {
+  const totalTracksPlayed = streamingHistory.length;
   const totalPlaytime =
-    rawData
+    streamingHistory
       .map((data) => {
         return data.msPlayed;
       })
@@ -17,9 +18,10 @@ export default function dataViews({ rawData }) {
     (totalPlaytime * 60) /
     totalTracksPlayed
   ).toFixed(2);
-  const skippedSongs = rawData.filter(
+  const skippedSongs = streamingHistory.filter(
     ({ msPlayed }) => msPlayed < 5_000
   ).length;
+  const dataProcessor = new DataProcessor(streamingHistory);
   return (
     <>
       <h1>Files have been processed</h1>
@@ -43,8 +45,8 @@ export default function dataViews({ rawData }) {
           decimalPlaces={1}
         />
       </h2>
-      <TimeslotsRadarChart rawData={rawData} />
-      <WeekdaysRadarChart rawData={rawData} />
+      <TimeslotsRadarChart data={dataProcessor.getTimeslots()} />
+      <WeekdaysRadarChart data={dataProcessor.getTimeslots()} />
     </>
   );
 }
