@@ -4,8 +4,9 @@ export default function FileProcessor({ setFileTransferComplete }) {
   };
   return (
     <>
-      <h1>Files loaded</h1>
-      <button onClick={() => processFiles()}>Process</button>
+      <h1>Step 2: Process Files</h1>
+      <h2>Files have been loaded!</h2>
+      <button onClick={() => processFiles()}>Process Files</button>
     </>
   );
 }

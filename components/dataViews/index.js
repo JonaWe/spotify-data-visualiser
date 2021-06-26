@@ -13,8 +13,18 @@ export default function dataViews({ rawData }) {
     1000 /
     60 /
     60;
+  const averagePlaytimePerSong = (
+    (totalPlaytime * 60) /
+    totalTracksPlayed
+  ).toFixed(2);
+  const skippedSongs = rawData.filter(
+    ({ msPlayed }) => msPlayed < 5_000
+  ).length;
   return (
     <>
+      <h1>Files have been processed</h1>
+      <h2>Average playtime per song: {averagePlaytimePerSong} minutes</h2>
+      <h2>Songs skipped: {skippedSongs}</h2>
       <h2>
         <CountUp
           prefix="Total tracks played: "
@@ -22,7 +32,8 @@ export default function dataViews({ rawData }) {
           end={totalTracksPlayed}
           duration={2}
         />
-        <br />
+      </h2>
+      <h2>
         <CountUp
           prefix="Total playtime: "
           suffix=" hours"

@@ -19,7 +19,7 @@ export default function WeekdaysRadarChart({ rawData }) {
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data_timeslots}>
           <PolarGrid />
           <PolarAngleAxis dataKey="timeslot" />
-          <PolarRadiusAxis />
+          <PolarRadiusAxis axisLine={false} tick={false} />
           <Radar
             name="Total hours listening"
             dataKey="totalTimeSpent"

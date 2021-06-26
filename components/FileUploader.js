@@ -26,11 +26,13 @@ export default function FileUploader({ setHistory }) {
   });
 
   return (
-    <>
-      <div {...getRootProps({ className: 'dropzone' })}>
-        <input {...getInputProps()} />
-        <p>Click or drag 'n' drop to load a file</p>
-      </div>
-    </>
+    <div
+      style={{ height: '100vh' }}
+      {...getRootProps({ className: 'dropzone' })}
+    >
+      <input {...getInputProps()} />
+      <h1>Step 1: Load a file</h1>
+      <p>Click anywhere or drag 'n' drop to load a file</p>
+    </div>
   );
 }

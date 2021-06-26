@@ -19,7 +19,7 @@ export default function TimeslotsRadarChart({ rawData }) {
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data_timeslots}>
           <PolarGrid />
           <PolarAngleAxis dataKey="timeslot" />
-          <PolarRadiusAxis />
+          <PolarRadiusAxis axisLine={false} tick={false} />
           <Radar
             name="Hours spent listening"
             dataKey="totalTimeSpent"
