@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import DataProcessor from '../../lib/DataProcessor';
 import TimeslotsRadarChart from './TimeslotsRadarChart';
 import WeekdaysRadarChart from './WeekdaysRadarChart';
@@ -5,10 +6,20 @@ import Top10BarChart from './Top10BarChart';
 import ActivityPastYear from './ActivityPastYear';
 import NumberWithUnit from '../NumberWithUnit';
 
-export default function dataViews({ streamingHistory }) {
+export default function dataViews({ streamingHistory, userIdentity }) {
   const dataProcessor = new DataProcessor(streamingHistory);
   return (
     <>
+      <img
+        src={userIdentity.largeImageUrl}
+        style={{
+          borderRadius: '50%',
+          objectFit: 'cover',
+          width: '200px',
+          height: '200px',
+        }}
+      />
+      <h1>{userIdentity.displayName}</h1>
       <h1>Stats for the past year</h1>
       <NumberWithUnit
         prefix="Total playtime: "

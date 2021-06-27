@@ -2,18 +2,20 @@ import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import JSZip from 'jszip';
 
-export default function FileUploader({ setStreamingHistory }) {
+export default function FileUploader({ setStreamingHistory, setUserIdentity }) {
   const onDrop = useCallback((acceptedFiles) => {
     const rawStreamingHistory = [];
 
     acceptedFiles.forEach(async (file) => {
       const zip = await JSZip.loadAsync(file);
       zip.forEach(async (relativePath, zipEntry) => {
-        if (/StreamingHistory[0-9]+.json/.test(zipEntry.name)) {
+        if (/StreamingHistory[0-9]+.json$/.test(zipEntry.name)) {
           const jsonText = await zipEntry.async('text');
           const streamingHistoryPart = JSON.parse(jsonText);
           rawStreamingHistory.push(...streamingHistoryPart);
           setStreamingHistory(rawStreamingHistory);
+        } else if (/Identity.json$/.test(zipEntry.name)) {
+          setUserIdentity(JSON.parse(await zipEntry.async('text')));
         }
       });
     });

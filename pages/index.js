@@ -6,6 +6,7 @@ import DataViews from '../components/dataViews';
 
 export default function Home() {
   const [streamingHistory, setStreamingHistory] = useState([]);
+  const [userIdentity, setUserIdentity] = useState(null);
   const [fileTransferComplete, setFileTransferComplete] = useState(false);
 
   return (
@@ -17,11 +18,17 @@ export default function Home() {
       }}
     >
       {streamingHistory.length === 0 ? (
-        <FileUploader setStreamingHistory={setStreamingHistory} />
+        <FileUploader
+          setStreamingHistory={setStreamingHistory}
+          setUserIdentity={setUserIdentity}
+        />
       ) : !fileTransferComplete ? (
         <FileProcessor setFileTransferComplete={setFileTransferComplete} />
       ) : (
-        <DataViews streamingHistory={streamingHistory} />
+        <DataViews
+          streamingHistory={streamingHistory}
+          userIdentity={userIdentity}
+        />
       )}
     </div>
   );
