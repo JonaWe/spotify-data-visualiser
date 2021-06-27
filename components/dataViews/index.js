@@ -61,7 +61,10 @@ export default function dataViews({ streamingHistory, userIdentity }) {
       <h2>Top 10 Tracks by Playtime</h2>
       <Top10BarChart data={dataProcessor.getTopTracks()} dataKey="trackName" />
       <h2>Listening Activity related to Daytime</h2>
-      <TimeslotsRadarChart data={dataProcessor.getTimeslots()} />
+      <TimeslotsRadarChart
+        data={dataProcessor.getTimeslots()}
+        totalDays={dataProcessor.getTotalDays()}
+      />
       <h2>Listening Activity related to Weekday</h2>
       <WeekdaysRadarChart data={dataProcessor.getWeekdays()} />
     </>

@@ -1,9 +1,11 @@
 const theme = {
-  fontColorPrimary: '#fff',
+  fcPrimary: '#ffffff',
+  fcLight: '#bababa',
   accentColor: '#1CB955',
-  backgroundDark: '#121212',
-  backgroundPrimary: '#121212',
-  backgroundSecondary: '#181919',
+  bgMDark: '#333',
+  bgDark: '#000',
+  bgPrimary: '#121212',
+  bgSecondary: '#181919',
 };
 
 export default theme;

@@ -10,8 +10,8 @@ const Main = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
-  background-color: ${({ theme }) => theme.backgroundPrimary};
-  color: ${({ theme }) => theme.fontColorPrimary};
+  background-color: ${({ theme }) => theme.bgPrimary};
+  color: ${({ theme }) => theme.fcPrimary};
 `;
 
 export default function Home() {
