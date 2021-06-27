@@ -3,10 +3,8 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip,
-  Label,
 } from 'recharts';
 
 import { format } from 'date-fns';
@@ -21,6 +19,14 @@ const CTT = styled.div`
   background-color: ${({ theme }) => theme.fcPrimary}C0;
   color: ${({ theme }) => theme.bgDark};
   /* backdrop-filter: blur(3px); */
+  @media screen and (max-width: 768px) {
+    h3 {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 const CustomToolTip = ({ active, payload, label, totalDays }) => {
@@ -41,10 +47,6 @@ const CustomToolTip = ({ active, payload, label, totalDays }) => {
         <p>
           Total listening time past year: <b>{totalPlaytime}</b>
         </p>
-        {/* <p>
-          Between {startTime} and {endTime} you listen <br />
-          {playtime} on average.
-        </p> */}
       </CTT>
     );
   } else return null;
@@ -67,9 +69,14 @@ export default function TimeslotsRadarChart({
           <PolarGrid stroke={theme.bgMDark} />
           <PolarAngleAxis
             dataKey="hour"
-            name="hey"
             stroke={theme.bgMDark}
             tick={{ fill: theme.fcLight }}
+            tickFormatter={(value) =>
+              value % 3 === 0
+                ? format(new Date().setHours(value), "h aaaaa'm'")
+                : ''
+            }
+            type="category"
           />
           <Radar
             name="Hours spent listening"
