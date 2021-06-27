@@ -1,31 +1,29 @@
 import {
-  BarChart,
-  Bar,
-  Cell,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 
-export default function Top10BarChart({ data, dataKey }) {
+export default function ActivityPastYear({ data }) {
   return (
     <div style={{ width: '80vw', height: '80vh' }}>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
+        <AreaChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={dataKey} />
+          <XAxis dataKey="date" />
           <YAxis />
           <Tooltip />
-          <Legend />
-          <Bar
-            name="Hours spent listening"
-            dataKey="hoursPlayed"
+          <Area
+            type="monotone"
+            dataKey="hours"
+            stroke="#8884d8"
             fill="#8884d8"
           />
-        </BarChart>
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );

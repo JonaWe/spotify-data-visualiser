@@ -2,6 +2,7 @@ import DataProcessor from '../../lib/DataProcessor';
 import TimeslotsRadarChart from './TimeslotsRadarChart';
 import WeekdaysRadarChart from './WeekdaysRadarChart';
 import Top10BarChart from './Top10BarChart';
+import ActivityPastYear from './ActivityPastYear';
 import NumberWithUnit from '../NumberWithUnit';
 
 export default function dataViews({ streamingHistory }) {
@@ -34,6 +35,13 @@ export default function dataViews({ streamingHistory }) {
         value={dataProcessor.getTopArtist().msPlayed}
         unit="days"
       />
+      <NumberWithUnit
+        prefix="Average playtime per day: "
+        value={dataProcessor.getAveragePlaytimePerDay()}
+        unit="hours"
+      />
+      <h2>Activity past year</h2>
+      <ActivityPastYear data={dataProcessor.getPlaytimeOverYear()} />
       <h2>Top 10 Artists by Playtime</h2>
       <Top10BarChart
         data={dataProcessor.getTopArtists()}
