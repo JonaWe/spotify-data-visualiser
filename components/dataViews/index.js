@@ -1,10 +1,11 @@
-import Image from 'next/image';
 import DataProcessor from '../../lib/DataProcessor';
 import TimeslotsRadarChart from './TimeslotsRadarChart';
 import WeekdaysRadarChart from './WeekdaysRadarChart';
 import Top10BarChart from './Top10BarChart';
 import ActivityPastYear from './ActivityPastYear';
 import NumberWithUnit from '../NumberWithUnit';
+import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
+import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
 
 export default function dataViews({ streamingHistory, userIdentity }) {
   const dataProcessor = new DataProcessor(streamingHistory);
@@ -61,12 +62,15 @@ export default function dataViews({ streamingHistory, userIdentity }) {
       <h2>Top 10 Tracks by Playtime</h2>
       <Top10BarChart data={dataProcessor.getTopTracks()} dataKey="trackName" />
       <h2>Listening Activity related to Daytime</h2>
-      <TimeslotsRadarChart
+      <DaytimeRadar
         data={dataProcessor.getTimeslots()}
         totalDays={dataProcessor.getTotalDays()}
       />
       <h2>Listening Activity related to Weekday</h2>
-      <WeekdaysRadarChart data={dataProcessor.getWeekdays()} />
+      <WeekdayRadar
+        data={dataProcessor.getWeekdays()}
+        totalDays={dataProcessor.getTotalDays()}
+      />
     </>
   );
 }
