@@ -12,7 +12,22 @@ import {
 import { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
 
-export default function Top10BarChart({ data, dataKey }) {
+import { CustomToolTipWrapper } from '../../Util/Util.elements';
+
+const PlayTimeByCategoryTT = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const totalPlaytime = `${Math.round(payload[0].value)} hours`;
+    return (
+      <CustomToolTipWrapper>
+        <h3>{label}</h3>
+        <p>
+          Total playtime: <b>{totalPlaytime}</b>
+        </p>
+      </CustomToolTipWrapper>
+    );
+  } else return null;
+};
+export default function PlaytimeBaCategory({ data, category }) {
   const theme = useContext(ThemeContext);
   return (
     <div style={{ width: '50vw', height: '80vh' }}>
@@ -26,10 +41,13 @@ export default function Top10BarChart({ data, dataKey }) {
           <XAxis
             tick={{ fill: theme.fcLight }}
             stroke={theme.bgMDark}
-            dataKey={dataKey}
+            dataKey={category}
           />
           <YAxis tick={{ fill: theme.fcLight }} stroke={theme.bgMDark} />
-          <Tooltip cursor={{ fill: theme.accentColor, fillOpacity: 0.1 }} />
+          <Tooltip
+            cursor={{ fill: theme.accentColor, fillOpacity: 0.1 }}
+            content={<PlayTimeByCategoryTT />}
+          />
           <Legend />
           <Bar
             name="Hours spent listening"

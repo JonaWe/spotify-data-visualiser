@@ -1,11 +1,9 @@
 import DataProcessor from '../../lib/DataProcessor';
-import TimeslotsRadarChart from './TimeslotsRadarChart';
-import WeekdaysRadarChart from './WeekdaysRadarChart';
-import Top10BarChart from './Top10BarChart';
 import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
 import NumberWithUnit from '../NumberWithUnit';
 import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
 import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
+import PlaytimeBaCategory from './Charts/BarCharts/PlaytimeByCategory';
 
 export default function dataViews({ streamingHistory, userIdentity }) {
   const dataProcessor = new DataProcessor(streamingHistory);
@@ -55,12 +53,15 @@ export default function dataViews({ streamingHistory, userIdentity }) {
       <h2>Activity past year</h2>
       <ActivityPastYear data={dataProcessor.getPlaytimeOverYear()} />
       <h2>Top 10 Artists by Playtime</h2>
-      <Top10BarChart
+      <PlaytimeBaCategory
         data={dataProcessor.getTopArtists()}
-        dataKey="artistName"
+        category="artistName"
       />
       <h2>Top 10 Tracks by Playtime</h2>
-      <Top10BarChart data={dataProcessor.getTopTracks()} dataKey="trackName" />
+      <PlaytimeBaCategory
+        data={dataProcessor.getTopTracks()}
+        category="trackName"
+      />
       <h2>Listening Activity related to Daytime</h2>
       <DaytimeRadar
         data={dataProcessor.getTimeslots()}

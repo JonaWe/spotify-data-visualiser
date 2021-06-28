@@ -16,7 +16,7 @@ import { CustomToolTipWrapper } from '../../Util/Util.elements';
 const PastYearActivityTT = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     const displayTime = format(label, 'MMMM, yyyy');
-    const listeningTime = `${payload[0].value} hours`;
+    const listeningTime = `${Math.round(payload[0].value)} hours`;
     return (
       <CustomToolTipWrapper>
         <h3>{displayTime}</h3>
