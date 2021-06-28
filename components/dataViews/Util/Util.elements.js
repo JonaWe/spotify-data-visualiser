@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CustomToolTipWrapper = styled.div`
   padding: 0.15em 1em;
-  border-radius: 0.25em;
+  border-radius: 0.35em;
   background-color: ${({ theme }) => theme.fcPrimary}C0;
   color: ${({ theme }) => theme.bgDark};
   /* backdrop-filter: blur(3px); */

@@ -2,7 +2,7 @@ import DataProcessor from '../../lib/DataProcessor';
 import TimeslotsRadarChart from './TimeslotsRadarChart';
 import WeekdaysRadarChart from './WeekdaysRadarChart';
 import Top10BarChart from './Top10BarChart';
-import ActivityPastYear from './ActivityPastYear';
+import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
 import NumberWithUnit from '../NumberWithUnit';
 import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
 import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
