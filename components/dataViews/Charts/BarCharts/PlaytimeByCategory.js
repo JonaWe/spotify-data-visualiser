@@ -46,6 +46,9 @@ export default function PlaytimeBaCategory({ data, category }) {
           <YAxis tick={{ fill: theme.fcLight }} stroke={theme.bgMDark} />
           <Tooltip
             cursor={{ fill: theme.accentColor, fillOpacity: 0.1 }}
+            isAnimationActive={true}
+            animationEasing="ease-out"
+            animationDuration={200}
             content={<PlayTimeByCategoryTT />}
           />
           <Legend />
