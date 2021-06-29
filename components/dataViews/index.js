@@ -9,6 +9,7 @@ import PlaytimeBaCategory from './Charts/BarCharts/PlaytimeByCategory';
 
 export default function dataViews({ streamingHistory, userIdentity }) {
   const [maxArtists, setMaxArtists] = useState(10);
+  const [maxSongs, setMaxSongs] = useState(10);
   const [artistFilter, setArtistFilter] = useState([]);
   const [songFilter, setSongFilter] = useState([]);
   const artistFilterRef = useRef(null);
@@ -59,48 +60,54 @@ export default function dataViews({ streamingHistory, userIdentity }) {
       />
       <h2>Activity past year</h2>
       <h3>Artist Filter</h3>
-      <input ref={artistFilterRef} />
-      <button
-        onClick={() => {
-          const value = artistFilterRef.current.value;
-          const newFilter = [];
-          if (value !== '') newFilter.push(value);
+      <input
+        type="text"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            const value = e.target.value;
+            const newFilter = [];
+            if (value !== '') newFilter.push(value);
 
-          setArtistFilter(newFilter);
+            setArtistFilter(newFilter);
+          }
         }}
-      >
-        Update
-      </button>
+      />
       <h3>Song Filter</h3>
-      <input ref={songFilterRef} />
-      <button
-        onClick={() => {
-          const value = songFilterRef.current.value;
-          const newFilter = [];
-          if (value !== '') newFilter.push(value);
+      <input
+        type="text"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            const value = e.target.value;
+            const newFilter = [];
+            if (value !== '') newFilter.push(value);
 
-          setSongFilter(newFilter);
+            setSongFilter(newFilter);
+          }
         }}
-      >
-        Update
-      </button>
+      />
       <ActivityPastYear
         data={dataProcessor.getPlaytimeOverYear(artistFilter, songFilter)}
       />
       <h2>Top 10 Artists by Playtime</h2>
-      <input
-        type="number"
-        defaultValue={10}
-        onInput={(e) => setMaxArtists(e.target.value)}
-        // onChange={(e) => setMaxArtists(e.target.value)}
-      />
+      <select onChange={(e) => setMaxArtists(e.target.value)}>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
       <PlaytimeBaCategory
         data={dataProcessor.getTopArtists(maxArtists)}
         category="artistName"
       />
       <h2>Top 10 Tracks by Playtime</h2>
+      <select onChange={(e) => setMaxSongs(e.target.value)}>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
       <PlaytimeBaCategory
-        data={dataProcessor.getTopTracks()}
+        data={dataProcessor.getTopTracks(maxSongs)}
         category="trackName"
       />
       <h2>Listening Activity related to Daytime</h2>

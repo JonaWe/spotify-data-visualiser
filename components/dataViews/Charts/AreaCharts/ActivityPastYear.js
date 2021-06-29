@@ -14,9 +14,16 @@ import { format } from 'date-fns';
 import { CustomToolTipWrapper } from '../../Util/Util.elements';
 
 const PastYearActivityTT = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
+  if (active && payload && payload.length && label) {
     const displayTime = format(label, 'MMMM, yyyy');
-    const listeningTime = `${Math.round(payload[0].value)} hours`;
+    let listeningTime = payload[0].value;
+    listeningTime = `${
+      listeningTime < 1
+        ? Math.round(listeningTime * 60)
+        : listeningTime < 15
+        ? listeningTime.toFixed(1)
+        : Math.round(listeningTime)
+    } ${listeningTime < 1 ? 'minutes' : 'hours'}`;
     return (
       <CustomToolTipWrapper>
         <h3>{displayTime}</h3>
@@ -30,6 +37,9 @@ const PastYearActivityTT = ({ active, payload, label }) => {
 
 export default function ActivityPastYear({ data }) {
   const theme = useContext(ThemeContext);
+  if (!(data && data.length && data.length !== 0))
+    data = [{ date: new Date(), hours: 0 }];
+  console.log(data);
   return (
     <div style={{ width: '60vw', height: '80vh' }}>
       <ResponsiveContainer width="100%" height="100%">
