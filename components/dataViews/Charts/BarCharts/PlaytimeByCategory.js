@@ -14,12 +14,17 @@ import { useContext } from 'react';
 
 import { CustomToolTipWrapper } from '../../Util/Util.elements';
 
-const PlayTimeByCategoryTT = ({ active, payload, label }) => {
+const PlayTimeByCategoryTT = ({ active, payload, label, category }) => {
   if (active && payload && payload.length) {
     const totalPlaytime = `${Math.round(payload[0].value)} hours`;
     return (
       <CustomToolTipWrapper>
         <h3>{label}</h3>
+        {category === 'trackName' && (
+          <p>
+            Artist: <b>{payload[0].payload.artistName}</b>
+          </p>
+        )}
         <p>
           Total playtime: <b>{totalPlaytime}</b>
         </p>
@@ -49,7 +54,7 @@ export default function PlaytimeBaCategory({ data, category }) {
             isAnimationActive={true}
             animationEasing="ease-out"
             animationDuration={200}
-            content={<PlayTimeByCategoryTT />}
+            content={<PlayTimeByCategoryTT category={category} />}
           />
           <Legend />
           <Bar
