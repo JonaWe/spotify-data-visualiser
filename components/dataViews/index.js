@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import { format } from 'date-fns';
 
 import DataProcessor from '../../lib/DataProcessor';
 import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
@@ -53,6 +54,10 @@ export default function dataViews({
     <>
       {userInfo}
       <h1>Stats for the past year</h1>
+      <h2>
+        Account created on{' '}
+        {format(new Date(userData.creationTime), 'do MMMM yyyy')}
+      </h2>
       <NumberWithUnit
         prefix="Total playtime: "
         value={dataProcessor.getTotalPlaytime()}
