@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
 
 import DataProcessor from '../../lib/DataProcessor';
 import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
@@ -7,21 +8,33 @@ import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
 import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
 import PlaytimeBaCategory from './Charts/BarCharts/PlaytimeByCategory';
 
+import defaultPic from '../../public/images/default_user.png';
+
 export default function dataViews({ streamingHistory, userIdentity }) {
   const [maxArtists, setMaxArtists] = useState(10);
   const [maxSongs, setMaxSongs] = useState(10);
   const dataProcessor = new DataProcessor(streamingHistory);
   return (
     <>
-      <img
-        src={userIdentity.largeImageUrl}
-        style={{
-          borderRadius: '50%',
-          objectFit: 'cover',
-          width: '200px',
-          height: '200px',
-        }}
-      />
+      {userIdentity.largeImageUrl ? (
+        <img
+          src={userIdentity.largeImageUrl}
+          style={{
+            borderRadius: '50%',
+            objectFit: 'cover',
+            width: '200px',
+            height: '200px',
+          }}
+        />
+      ) : (
+        <Image
+          className="rounded-image" // todo use something else the a class name for styling
+          src={defaultPic}
+          width={200}
+          height={200}
+        />
+      )}
+
       <h1>{userIdentity.displayName}</h1>
       <h1>Stats for the past year</h1>
       <NumberWithUnit
