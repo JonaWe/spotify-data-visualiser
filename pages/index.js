@@ -18,6 +18,7 @@ export default function Home() {
   const [streamingHistory, setStreamingHistory] = useState([]);
   const [userIdentity, setUserIdentity] = useState(null);
   const [fileTransferComplete, setFileTransferComplete] = useState(false);
+  const [userData, setUserdata] = useState(false);
 
   return (
     <Main>
@@ -25,6 +26,7 @@ export default function Home() {
         <FileUploader
           setStreamingHistory={setStreamingHistory}
           setUserIdentity={setUserIdentity}
+          setUserdata={setUserdata}
         />
       ) : !fileTransferComplete ? (
         <FileProcessor setFileTransferComplete={setFileTransferComplete} />
@@ -32,6 +34,7 @@ export default function Home() {
         <DataViews
           streamingHistory={streamingHistory}
           userIdentity={userIdentity}
+          userData={userData}
         />
       )}
     </Main>

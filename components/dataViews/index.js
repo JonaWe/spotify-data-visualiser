@@ -10,7 +10,11 @@ import PlaytimeBaCategory from './Charts/BarCharts/PlaytimeByCategory';
 
 import defaultPic from '../../public/images/default_user.png';
 
-export default function dataViews({ streamingHistory, userIdentity }) {
+export default function dataViews({
+  streamingHistory,
+  userIdentity,
+  userData,
+}) {
   const [maxArtists, setMaxArtists] = useState(10);
   const [maxSongs, setMaxSongs] = useState(10);
   const dataProcessor = new DataProcessor(streamingHistory);
@@ -39,7 +43,7 @@ export default function dataViews({ streamingHistory, userIdentity }) {
       {userIdentity && userIdentity.displayName ? (
         <h1>{userIdentity.displayName}</h1>
       ) : (
-        <h1>Username</h1>
+        <h1>{userData.username}</h1>
       )}
       <h1></h1>
     </>
