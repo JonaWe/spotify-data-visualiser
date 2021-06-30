@@ -14,28 +14,40 @@ export default function dataViews({ streamingHistory, userIdentity }) {
   const [maxArtists, setMaxArtists] = useState(10);
   const [maxSongs, setMaxSongs] = useState(10);
   const dataProcessor = new DataProcessor(streamingHistory);
+  const userImage =
+    userIdentity && userIdentity.largeImageUrl ? (
+      <img
+        src={userIdentity.largeImageUrl}
+        style={{
+          borderRadius: '50%',
+          objectFit: 'cover',
+          width: '200px',
+          height: '200px',
+        }}
+      />
+    ) : (
+      <Image
+        className="rounded-image" // todo use something else the a class name for styling
+        src={defaultPic}
+        width={200}
+        height={200}
+      />
+    );
+  const userInfo = (
+    <>
+      {userImage}
+      {userIdentity && userIdentity.displayName ? (
+        <h1>{userIdentity.displayName}</h1>
+      ) : (
+        <h1>Username</h1>
+      )}
+      <h1></h1>
+    </>
+  );
+
   return (
     <>
-      {userIdentity.largeImageUrl ? (
-        <img
-          src={userIdentity.largeImageUrl}
-          style={{
-            borderRadius: '50%',
-            objectFit: 'cover',
-            width: '200px',
-            height: '200px',
-          }}
-        />
-      ) : (
-        <Image
-          className="rounded-image" // todo use something else the a class name for styling
-          src={defaultPic}
-          width={200}
-          height={200}
-        />
-      )}
-
-      <h1>{userIdentity.displayName}</h1>
+      {userInfo}
       <h1>Stats for the past year</h1>
       <NumberWithUnit
         prefix="Total playtime: "
