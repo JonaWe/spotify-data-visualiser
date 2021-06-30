@@ -31,6 +31,7 @@ export default function FileUploader({
     noKeyboard: true,
     maxFiles: 1,
     onDrop,
+    accept: '.zip',
   });
 
   return (
