@@ -10,10 +10,6 @@ import PlaytimeBaCategory from './Charts/BarCharts/PlaytimeByCategory';
 export default function dataViews({ streamingHistory, userIdentity }) {
   const [maxArtists, setMaxArtists] = useState(10);
   const [maxSongs, setMaxSongs] = useState(10);
-  const [artistFilter, setArtistFilter] = useState([]);
-  const [songFilter, setSongFilter] = useState([]);
-  const artistFilterRef = useRef(null);
-  const songFilterRef = useRef(null);
   const dataProcessor = new DataProcessor(streamingHistory);
   return (
     <>
@@ -59,35 +55,7 @@ export default function dataViews({ streamingHistory, userIdentity }) {
         unit="hours"
       />
       <h2>Activity past year</h2>
-      <h3>Artist Filter</h3>
-      <input
-        type="text"
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            const value = e.target.value;
-            const newFilter = [];
-            if (value !== '') newFilter.push(value);
-
-            setArtistFilter(newFilter);
-          }
-        }}
-      />
-      <h3>Song Filter</h3>
-      <input
-        type="text"
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            const value = e.target.value;
-            const newFilter = [];
-            if (value !== '') newFilter.push(value);
-
-            setSongFilter(newFilter);
-          }
-        }}
-      />
-      <ActivityPastYear
-        data={dataProcessor.getPlaytimeOverYear(artistFilter, songFilter)}
-      />
+      <ActivityPastYear dataProcessor={dataProcessor} />
       <h2>Top 10 Artists by Playtime</h2>
       <select onChange={(e) => setMaxArtists(e.target.value)}>
         <option value="10">10</option>

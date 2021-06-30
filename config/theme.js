@@ -2,6 +2,7 @@ const theme = {
   fcPrimary: '#ffffff',
   fcLight: '#bababa',
   accentColor: '#1CB955',
+  dangerColor: '#fc1639',
   bgMDark: '#333333',
   bgDark: '#000000',
   bgPrimary: '#121212', // #121212
