@@ -1,11 +1,13 @@
+import { Button } from './util';
+
 export default function FileProcessor({ setFileTransferComplete }) {
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '100vh', textAlign: 'center' }}>
       <h1>Step 2: Process Files</h1>
       <h2>Files have been loaded!</h2>
-      <button onClick={() => setFileTransferComplete(true)}>
+      <Button onClick={() => setFileTransferComplete(true)} primary>
         Process Files
-      </button>
+      </Button>
     </div>
   );
 }
