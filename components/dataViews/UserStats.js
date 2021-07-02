@@ -1,8 +1,15 @@
+import styled from 'styled-components';
 import NumberWithUnit from '../NumberWithUnit';
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em 1em;
+`;
 
 export default function UserStats({ dataProcessor }) {
   return (
-    <>
+    <Wrapper>
       <NumberWithUnit
         prefix="Total playtime: "
         value={dataProcessor.getTotalPlaytime()}
@@ -33,6 +40,6 @@ export default function UserStats({ dataProcessor }) {
         value={dataProcessor.getAveragePlaytimePerDay()}
         unit="hours"
       />
-    </>
+    </Wrapper>
   );
 }

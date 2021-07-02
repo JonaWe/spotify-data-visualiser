@@ -12,7 +12,7 @@ const Value = styled.p`
   font-size: 1.75em;
   letter-spacing: 0.05em;
   color: ${(props) => props.theme.fcPrimary};
-  margin: 0;
+  margin: 0 0 0.15em 0;
 `;
 
 const Label = styled.p`
