@@ -32,7 +32,7 @@ const PlayTimeByCategoryTT = ({ active, payload, label, category }) => {
     );
   } else return null;
 };
-export default function PlaytimeBaCategory({ data, category }) {
+export default function PlaytimeByCategory({ data, category }) {
   const theme = useContext(ThemeContext);
   return (
     <div style={{ width: '50vw', height: '80vh' }}>

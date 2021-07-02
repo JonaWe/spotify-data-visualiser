@@ -78,6 +78,7 @@ export default function ActivityPastYear({ dataProcessor }) {
 
   return (
     <>
+      <h2>Activity past year</h2>
       <div style={{ width: '60vw', height: '80vh' }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data}>
