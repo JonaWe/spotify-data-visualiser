@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 
 import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
 import DataProcessor from '../../lib/DataProcessor';
-import NumberWithUnit from '../NumberWithUnit';
+import UserStats from './UserStats';
 import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
 import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
 import TopArtists from './Charts/BarCharts/TopArtists';
@@ -56,36 +56,7 @@ export default function dataViews({
         Account created on{' '}
         {format(new Date(userData.creationTime), 'do MMMM yyyy')}
       </h2>
-      <NumberWithUnit
-        prefix="Total playtime: "
-        value={dataProcessor.getTotalPlaytime()}
-        unit="days"
-      />
-      <NumberWithUnit
-        prefix="Total tracks played: "
-        value={dataProcessor.getTotalTracksPlayed()}
-      />
-      <NumberWithUnit
-        prefix="Average playtime per song: "
-        value={dataProcessor.getAverageSongPlaytime()}
-        unit="minutes"
-      />
-      <NumberWithUnit
-        prefix="Songs skipped: "
-        value={dataProcessor.getTotalSkippedSongs()}
-      />
-      <NumberWithUnit
-        prefix={`Top Artist is '${
-          dataProcessor.getTopArtist().artistName
-        }' with a playtime of `}
-        value={dataProcessor.getTopArtist().msPlayed}
-        unit="days"
-      />
-      <NumberWithUnit
-        prefix="Average playtime per day: "
-        value={dataProcessor.getAveragePlaytimePerDay()}
-        unit="hours"
-      />
+      <UserStats dataProcessor={dataProcessor} />
       <ActivityPastYear dataProcessor={dataProcessor} />
       <TopArtists dataProcessor={dataProcessor} />
       <TopTracks dataProcessor={dataProcessor} />
