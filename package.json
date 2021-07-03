@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "d3-format": "^2.0.0",
     "date-fns": "^2.22.1",
     "jszip": "^3.6.0",
     "next": "11.0.1",

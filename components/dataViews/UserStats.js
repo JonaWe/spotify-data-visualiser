@@ -8,37 +8,31 @@ const Wrapper = styled.div`
 `;
 
 export default function UserStats({ dataProcessor }) {
+  const tracksPlayed = dataProcessor.getTotalTracksPlayed();
+  const tracksSkipped = dataProcessor.getTotalSkippedSongs();
   return (
     <Wrapper>
       <NumberWithUnit
-        prefix="Total playtime: "
+        label="Listening Time"
         value={dataProcessor.getTotalPlaytime()}
         unit="days"
       />
       <NumberWithUnit
-        prefix="Total tracks played: "
-        value={dataProcessor.getTotalTracksPlayed()}
+        label="Listening Time per Day"
+        value={dataProcessor.getAveragePlaytimePerDay()}
+        unit="hours"
       />
       <NumberWithUnit
-        prefix="Average playtime per song: "
+        label="Average Song Duration"
         value={dataProcessor.getAverageSongPlaytime()}
         unit="minutes"
       />
+      <NumberWithUnit label="Tracks Played" value={tracksPlayed} />
+      <NumberWithUnit label="Tracks Skipped" value={tracksSkipped} />
       <NumberWithUnit
-        prefix="Songs skipped: "
-        value={dataProcessor.getTotalSkippedSongs()}
-      />
-      <NumberWithUnit
-        prefix={`Top Artist is '${
-          dataProcessor.getTopArtist().artistName
-        }' with a playtime of `}
-        value={dataProcessor.getTopArtist().msPlayed}
-        unit="days"
-      />
-      <NumberWithUnit
-        prefix="Average playtime per day: "
-        value={dataProcessor.getAveragePlaytimePerDay()}
-        unit="hours"
+        label="Tracks Skipped"
+        value={tracksSkipped / tracksPlayed}
+        unit="ratio"
       />
     </Wrapper>
   );

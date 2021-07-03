@@ -1,4 +1,5 @@
 import { CountUp } from 'use-count-up';
+import { format } from 'd3-format';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -26,7 +27,7 @@ const Label = styled.p`
 export default function NumberWithUnit({
   unit = Unit.none,
   value,
-  prefix = '',
+  label,
   decimalPlaces,
 }) {
   switch (unit) {
@@ -46,6 +47,9 @@ export default function NumberWithUnit({
       value = toDays(value);
       break;
 
+    case Unit.ratio:
+      value = value * 100;
+
     default:
       break;
   }
@@ -56,7 +60,9 @@ export default function NumberWithUnit({
           isCounting
           end={value}
           duration={2}
-          suffix={unit === Unit.none ? '' : ' ' + unit}
+          suffix={
+            unit === Unit.none ? '' : unit === Unit.ratio ? ' %' : ' ' + unit
+          }
           decimalPlaces={
             typeof decimalPlaces !== 'undefined'
               ? decimalPlaces
@@ -66,7 +72,7 @@ export default function NumberWithUnit({
           }
         />
       </Value>
-      <Label>{prefix}</Label>
+      <Label>{label}</Label>
     </Wrapper>
   );
 }
@@ -77,6 +83,7 @@ const Unit = {
   minutes: 'minutes',
   hours: 'hours',
   days: 'days',
+  ratio: 'ratio',
 };
 
 function toSeconds(time_in_ms) {
