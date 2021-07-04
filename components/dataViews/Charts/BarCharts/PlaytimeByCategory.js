@@ -6,13 +6,12 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from 'recharts';
 
 import { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
 
-import { CustomToolTipWrapper } from '../../Util/Util.elements';
+import { ChartWrapper, CustomToolTipWrapper } from '../../Util/Util.elements';
 
 const PlayTimeByCategoryTT = ({ active, payload, label, category }) => {
   if (active && payload && payload.length) {
@@ -35,35 +34,33 @@ const PlayTimeByCategoryTT = ({ active, payload, label, category }) => {
 export default function PlaytimeByCategory({ data, category }) {
   const theme = useContext(ThemeContext);
   return (
-    <div style={{ width: '50vw', height: '80vh' }}>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <CartesianGrid
-            vertical={false}
-            stroke={theme.bgMDark}
-            strokeDasharray="3 3"
-          />
-          <XAxis
-            tick={{ fill: theme.fcLight }}
-            stroke={theme.bgMDark}
-            dataKey={category}
-          />
-          <YAxis tick={{ fill: theme.fcLight }} stroke={theme.bgMDark} />
-          <Tooltip
-            cursor={{ fill: theme.accentColor, fillOpacity: 0.1 }}
-            isAnimationActive={true}
-            animationEasing="ease-out"
-            animationDuration={200}
-            content={<PlayTimeByCategoryTT category={category} />}
-          />
-          <Legend />
-          <Bar
-            name="Hours spent listening"
-            dataKey="hoursPlayed"
-            fill={theme.accentColor}
-          />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <ChartWrapper>
+      <BarChart data={data}>
+        <CartesianGrid
+          vertical={false}
+          stroke={theme.bgMDark}
+          strokeDasharray="3 3"
+        />
+        <XAxis
+          tick={{ fill: theme.fcLight }}
+          stroke={theme.bgMDark}
+          dataKey={category}
+        />
+        <YAxis tick={{ fill: theme.fcLight }} stroke={theme.bgMDark} />
+        <Tooltip
+          cursor={{ fill: theme.accentColor, fillOpacity: 0.1 }}
+          isAnimationActive={true}
+          animationEasing="ease-out"
+          animationDuration={200}
+          content={<PlayTimeByCategoryTT category={category} />}
+        />
+        <Legend />
+        <Bar
+          name="Hours spent listening"
+          dataKey="hoursPlayed"
+          fill={theme.accentColor}
+        />
+      </BarChart>
+    </ChartWrapper>
   );
 }

@@ -6,11 +6,10 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  ResponsiveContainer,
   Tooltip,
 } from 'recharts';
 
-import { CustomToolTipWrapper } from '../../Util/Util.elements';
+import { ChartWrapper, CustomToolTipWrapper } from '../../Util/Util.elements';
 
 const DaytimeActivityTT = ({ active, payload, label, totalDays }) => {
   if (active && payload && payload.length) {
@@ -42,41 +41,39 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
   return (
     <>
       <h2>Listening Activity related to Daytime</h2>
-      <div style={{ width: '100vw', height: '80vh' }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <RadarChart
-            startAngle={90 + angleOffset}
-            endAngle={-270 + angleOffset}
-            data={data}
-          >
-            <PolarGrid stroke={theme.bgMDark} />
-            <PolarAngleAxis
-              dataKey="hour"
-              stroke={theme.bgMDark}
-              tick={{ fill: theme.fcLight }}
-              tickFormatter={(value) =>
-                value % 3 === 0
-                  ? format(new Date().setHours(value), "h aaaaa'm'")
-                  : ''
-              }
-              type="category"
-            />
-            <Radar
-              dataKey="msPlayed"
-              stroke={theme.accentColor}
-              strokeWidth={1.5}
-              fill={theme.accentColor}
-              fillOpacity={0.25}
-            />
-            <Tooltip
-              isAnimationActive={true}
-              animationEasing="ease-out"
-              animationDuration={200}
-              content={<DaytimeActivityTT totalDays={totalDays} />}
-            />
-          </RadarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartWrapper>
+        <RadarChart
+          startAngle={90 + angleOffset}
+          endAngle={-270 + angleOffset}
+          data={data}
+        >
+          <PolarGrid stroke={theme.bgMDark} />
+          <PolarAngleAxis
+            dataKey="hour"
+            stroke={theme.bgMDark}
+            tick={{ fill: theme.fcLight }}
+            tickFormatter={(value) =>
+              value % 3 === 0
+                ? format(new Date().setHours(value), "h aaaaa'm'")
+                : ''
+            }
+            type="category"
+          />
+          <Radar
+            dataKey="msPlayed"
+            stroke={theme.accentColor}
+            strokeWidth={1.5}
+            fill={theme.accentColor}
+            fillOpacity={0.25}
+          />
+          <Tooltip
+            isAnimationActive={true}
+            animationEasing="ease-out"
+            animationDuration={200}
+            content={<DaytimeActivityTT totalDays={totalDays} />}
+          />
+        </RadarChart>
+      </ChartWrapper>
     </>
   );
 }

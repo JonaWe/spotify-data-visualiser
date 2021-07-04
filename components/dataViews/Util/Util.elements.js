@@ -1,3 +1,4 @@
+import { ResponsiveContainer } from 'recharts';
 import styled from 'styled-components';
 
 export const CustomToolTipWrapper = styled.div`
@@ -14,4 +15,19 @@ export const CustomToolTipWrapper = styled.div`
       font-size: 0.8rem;
     }
   }
+`;
+
+export const ChartWrapper = ({ children }) => {
+  return (
+    <ChartDivWrapper>
+      <ResponsiveContainer width="100%" height="100%">
+        {children}
+      </ResponsiveContainer>
+    </ChartDivWrapper>
+  );
+};
+
+export const ChartDivWrapper = styled.div`
+  width: 85%;
+  height: 80vh;
 `;

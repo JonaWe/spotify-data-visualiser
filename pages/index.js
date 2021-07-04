@@ -6,12 +6,23 @@ import DataViews from '../components/dataViews';
 
 import styled from 'styled-components';
 
-const Main = styled.div`
+const MainWrapper = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
   background-color: ${({ theme }) => theme.bgPrimary};
   color: ${({ theme }) => theme.fcPrimary};
+`;
+
+const MainContent = styled.div`
+  width: 70vw;
+  background-color: ${(props) => props.theme.bgSecondary};
+  margin: 20vh 0;
+  padding: 5em;
+  border-radius: 2em;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 `;
 
 export default function Home() {
@@ -21,7 +32,7 @@ export default function Home() {
   const [userData, setUserdata] = useState(false);
 
   return (
-    <Main>
+    <MainWrapper>
       {streamingHistory.length === 0 ? (
         <FileUploader
           setStreamingHistory={setStreamingHistory}
@@ -31,12 +42,14 @@ export default function Home() {
       ) : !fileTransferComplete ? (
         <FileProcessor setFileTransferComplete={setFileTransferComplete} />
       ) : (
-        <DataViews
-          streamingHistory={streamingHistory}
-          userIdentity={userIdentity}
-          userData={userData}
-        />
+        <MainContent>
+          <DataViews
+            streamingHistory={streamingHistory}
+            userIdentity={userIdentity}
+            userData={userData}
+          />
+        </MainContent>
       )}
-    </Main>
+    </MainWrapper>
   );
 }

@@ -51,11 +51,10 @@ export default function dataViews({
   return (
     <>
       {userInfo}
-      <h1>Stats for the past year</h1>
-      <h2>
+      {/* <h2>
         Account created on{' '}
         {format(new Date(userData.creationTime), 'do MMMM yyyy')}
-      </h2>
+      </h2> */}
       <UserStats dataProcessor={dataProcessor} />
       <ActivityPastYear dataProcessor={dataProcessor} />
       <TopArtists dataProcessor={dataProcessor} />
