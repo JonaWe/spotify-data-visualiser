@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import styled from 'styled-components';
 import { format } from 'date-fns';
 
 import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
@@ -10,6 +11,22 @@ import TopArtists from './Charts/BarCharts/TopArtists';
 import TopTracks from './Charts/BarCharts/TopTracks';
 
 import defaultPic from '../../public/images/default_user.png';
+
+const ImageWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background-color: ${(props) => props.theme.bgMDark};
+  border-radius: 10vh;
+  text-align: center;
+`;
+
+const UserName = styled.p`
+  font-size: 2em;
+`;
 
 export default function dataViews({
   streamingHistory,
@@ -24,28 +41,27 @@ export default function dataViews({
         style={{
           borderRadius: '50%',
           objectFit: 'cover',
-          width: '200px',
-          height: '200px',
+          width: '150px',
+          height: '150px',
         }}
       />
     ) : (
       <Image
         className="rounded-image" // todo use something else the a class name for styling
         src={defaultPic}
-        width={200}
-        height={200}
+        width={150}
+        height={150}
       />
     );
   const userInfo = (
-    <>
+    <ImageWrapper>
       {userImage}
       {userIdentity && userIdentity.displayName ? (
-        <h1>{userIdentity.displayName}</h1>
+        <UserName>{userIdentity.displayName}</UserName>
       ) : (
-        <h1>{userData.username}</h1>
+        <UserName>{userData.username}</UserName>
       )}
-      <h1></h1>
-    </>
+    </ImageWrapper>
   );
 
   return (
