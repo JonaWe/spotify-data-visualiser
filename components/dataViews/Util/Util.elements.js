@@ -31,3 +31,27 @@ export const ChartDivWrapper = styled.div`
   width: 85%;
   height: 80vh;
 `;
+
+export const getSelectStyles = (theme) => ({
+  container: (provided, state) => ({
+    ...provided,
+    color: theme.bgPrimary,
+    maxWidth: '400px',
+    minWidth: '200px',
+  }),
+});
+
+export const getSelectTheme = (theme) => {
+  return (t) => ({
+    ...t,
+    colors: {
+      ...t.colors,
+      primary: theme.accentColor + 'BF',
+      primary75: theme.accentColor + 'BF',
+      primary50: theme.accentColor + '80',
+      primary25: theme.accentColor + '40',
+      danger: theme.dangerColor + 'ff',
+      dangerLight: theme.dangerColor + '00',
+    },
+  });
+};

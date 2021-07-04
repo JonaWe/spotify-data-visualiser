@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { ThemeContext } from 'styled-components';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import Select from 'react-select';
 import {
   Radar,
   RadarChart,
@@ -9,7 +10,12 @@ import {
   Tooltip,
 } from 'recharts';
 
-import { ChartWrapper, CustomToolTipWrapper } from '../../Util/Util.elements';
+import {
+  ChartWrapper,
+  CustomToolTipWrapper,
+  getSelectStyles,
+  getSelectTheme,
+} from '../../Util/Util.elements';
 
 const DaytimeActivityTT = ({ active, payload, label, totalDays }) => {
   if (active && payload && payload.length) {
@@ -35,9 +41,12 @@ const DaytimeActivityTT = ({ active, payload, label, totalDays }) => {
 };
 
 export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
-  const data = dataProcessor.getTimeslots();
+  const [weekdayFilter, setWeekdayFilter] = useState([]);
+  const data = dataProcessor.getTimeslots(weekdayFilter);
   const totalDays = dataProcessor.getTotalDays();
   const theme = useContext(ThemeContext);
+  const selectTheme = getSelectTheme(theme);
+  const selectStyles = getSelectStyles(theme);
   return (
     <>
       <h2>Listening Activity related to Daytime</h2>
@@ -74,6 +83,46 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
           />
         </RadarChart>
       </ChartWrapper>
+      <Select
+        isMulti
+        name="artists"
+        options={[
+          {
+            value: 1,
+            label: 'Monday',
+          },
+          {
+            value: 2,
+            label: 'Tuesday',
+          },
+          {
+            value: 3,
+            label: 'Wednesday',
+          },
+          {
+            value: 4,
+            label: 'Thursday',
+          },
+          {
+            value: 5,
+            label: 'Friday',
+          },
+          {
+            value: 6,
+            label: 'Saturday',
+          },
+          {
+            value: 0,
+            label: 'Sunday',
+          },
+        ]}
+        onChange={(newFilter) => {
+          setWeekdayFilter(newFilter.map(({ value }) => value));
+        }}
+        placeholder="Filter by Weekday..."
+        styles={selectStyles}
+        theme={selectTheme}
+      />
     </>
   );
 }

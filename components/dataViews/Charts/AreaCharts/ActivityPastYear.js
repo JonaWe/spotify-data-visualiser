@@ -11,7 +11,12 @@ import { useContext, useState } from 'react';
 import { format } from 'date-fns';
 import Select from 'react-select';
 
-import { ChartWrapper, CustomToolTipWrapper } from '../../Util/Util.elements';
+import {
+  ChartWrapper,
+  CustomToolTipWrapper,
+  getSelectStyles,
+  getSelectTheme,
+} from '../../Util/Util.elements';
 
 const PastYearActivityTT = ({ active, payload, label }) => {
   if (active && payload && payload.length && label) {
@@ -52,27 +57,8 @@ export default function ActivityPastYear({ dataProcessor }) {
   if (!(data && data.length && data.length !== 0))
     data = [{ date: new Date(), hours: 0 }];
 
-  const selectTheme = (t) => ({
-    ...t,
-    colors: {
-      ...t.colors,
-      primary: theme.accentColor + 'BF',
-      primary75: theme.accentColor + 'BF',
-      primary50: theme.accentColor + '80',
-      primary25: theme.accentColor + '40',
-      danger: theme.dangerColor + 'ff',
-      dangerLight: theme.dangerColor + '00',
-    },
-  });
-
-  const selectStyles = {
-    container: (provided, state) => ({
-      ...provided,
-      color: theme.bgPrimary,
-      maxWidth: '400px',
-      minWidth: '200px',
-    }),
-  };
+  const selectTheme = getSelectTheme(theme);
+  const selectStyles = getSelectStyles(theme);
 
   return (
     <>
