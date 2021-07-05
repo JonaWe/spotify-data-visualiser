@@ -33,7 +33,7 @@ export const Button = styled.button`
 export const Title = styled.h1`
   font-size: 4em;
   text-align: center;
-  padding: 17vh 0;
+  padding: 13vh 0;
   margin: 0;
 `;
 
@@ -87,4 +87,42 @@ export const CardWrapper = styled.div`
   @media screen and (max-width: 768px) {
     grid-auto-flow: row;
   }
+`;
+
+export const UploadCard = styled.div`
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.bgSecondary};
+  border-radius: 2em;
+  padding: 2em;
+`;
+
+export const UploadCardTitle = styled.h2`
+  text-align: center;
+  font-size: 2em;
+`;
+
+export const UploadCardDescription = styled.p`
+  color: ${(props) => props.theme.fcLight};
+  text-align: center;
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.accentColor};
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+export const HighlightedCardDescription = styled.span`
+  color: ${(props) =>
+    props.warning ? props.theme.dangerColor : props.theme.fcPrimary};
+`;
+
+export const DragZone = styled.div`
+  color: ${(props) => props.theme.fcLight};
+  border: dotted 2px ${(props) => props.theme.bgMDark};
+  border-radius: 1em;
+  padding: 6em 12em;
 `;

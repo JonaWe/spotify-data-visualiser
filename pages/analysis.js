@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import FileProcessor from '../components/FileProcessor';
 import FileUploader from '../components/FileUploader';
 import DataViews from '../components/dataViews';
 
@@ -24,20 +23,22 @@ const MainContent = styled.div`
 export default function Home() {
   const [streamingHistory, setStreamingHistory] = useState([]);
   const [userIdentity, setUserIdentity] = useState(null);
-  const [fileTransferComplete, setFileTransferComplete] = useState(false);
-  const [userData, setUserdata] = useState(false);
+  const [userData, setUserdata] = useState(null);
+  const [processingFinished, setProcessingFinished] = useState(false);
 
   return (
     <MainWrapper>
       <CenterdGridWrapper>
-        {streamingHistory.length === 0 ? (
+        {streamingHistory.length === 0 || !processingFinished ? (
           <FileUploader
             setStreamingHistory={setStreamingHistory}
             setUserIdentity={setUserIdentity}
             setUserdata={setUserdata}
+            setProcessingFinished={setProcessingFinished}
+            streamingHistory={streamingHistory}
+            userData={userData}
+            userIdentity={userIdentity}
           />
-        ) : !fileTransferComplete ? (
-          <FileProcessor setFileTransferComplete={setFileTransferComplete} />
         ) : (
           <>
             <Title>Your Spotify Stats for the Past Year</Title>
