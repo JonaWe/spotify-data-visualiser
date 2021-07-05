@@ -35,9 +35,31 @@ export const ChartDivWrapper = styled.div`
 export const getSelectStyles = (theme) => ({
   container: (provided, state) => ({
     ...provided,
-    color: theme.bgPrimary,
     maxWidth: '400px',
     minWidth: '200px',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '0',
+    borderRadius: '5px',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    overflowX: 'hidden',
+    '::-webkit-scrollbar': {
+      width: '10px',
+    },
+    '::-webkit-scrollbar-track': {
+      background: theme.bgMDark,
+      borderRadius: '5px',
+    },
+    '::-webkit-scrollbar-thumb': {
+      background: theme.fcULight,
+      borderRadius: '5px',
+    },
+    '::-webkit-scrollbar-thumb:hover': {
+      background: theme.accentColor,
+    },
   }),
 });
 
