@@ -17,7 +17,7 @@ const MainWrapper = styled.div`
 const MainContent = styled.div`
   width: 80vw;
   background-color: ${(props) => props.theme.bgSecondary};
-  margin: 20vh 0;
+  margin-bottom: 15vh;
   border-radius: 2em;
   display: grid;
   align-items: center;
@@ -26,6 +26,12 @@ const MainContent = styled.div`
   @media screen and (max-width: 768px) {
     width: 100vw;
   }
+`;
+
+const Title = styled.h1`
+  font-size: 4em;
+  text-align: center;
+  margin: 17vh 0;
 `;
 
 export default function Home() {
@@ -45,13 +51,16 @@ export default function Home() {
       ) : !fileTransferComplete ? (
         <FileProcessor setFileTransferComplete={setFileTransferComplete} />
       ) : (
-        <MainContent>
-          <DataViews
-            streamingHistory={streamingHistory}
-            userIdentity={userIdentity}
-            userData={userData}
-          />
-        </MainContent>
+        <>
+          <Title>Your Spotify Stats for the Past Year</Title>
+          <MainContent>
+            <DataViews
+              streamingHistory={streamingHistory}
+              userIdentity={userIdentity}
+              userData={userData}
+            />
+          </MainContent>
+        </>
       )}
     </MainWrapper>
   );
