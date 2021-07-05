@@ -72,6 +72,9 @@ export const getSelectStyles = (theme, minWidth = '200px') => ({
     '::-webkit-scrollbar-thumb:hover': {
       background: theme.accentColor,
     },
+    '::-webkit-scrollbar-thumb:active': {
+      background: theme.accentColor,
+    },
   }),
 });
 
