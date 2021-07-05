@@ -8,11 +8,11 @@ export const Button = styled.button`
   text-align: center;
   text-transform: uppercase;
 
-  color: ${(props) =>
-    props.primary ? props.theme.fcPrimary : props.theme.accentColor};
+  color: ${(props) => props.theme.fcPrimary};
   background: ${(props) => (props.primary ? props.theme.accentColor : 'none')};
 
-  box-shadow: inset 0px 0px 0px 2px ${({ theme }) => theme.accentColor};
+  box-shadow: inset 0px 0px 0px ${(props) => (props.primary ? 0 : 2)}px
+    ${({ theme }) => theme.fcPrimary};
   box-sizing: border-box;
 
   border: none;
@@ -23,8 +23,28 @@ export const Button = styled.button`
   transition: all 0.2s ease;
   &:hover {
     cursor: pointer;
-    transform: ${(props) => (props.primary ? 'scale(1.05)' : '')};
-    background: ${(props) => (props.primary ? '' : props.theme.accentColor)};
-    color: ${(props) => (props.primary ? '' : props.theme.bgPrimary)};
+    transform: scale(1.05);
+    /* background: ${(props) =>
+      props.primary ? '' : props.theme.accentColor}; */
+    /* color: ${(props) => (props.primary ? '' : props.theme.bgPrimary)}; */
   }
+`;
+
+export const Title = styled.h1`
+  font-size: 4em;
+  text-align: center;
+  padding: 17vh 0;
+  margin: 0;
+`;
+
+export const CenterdGridWrapper = styled.div`
+  display: grid;
+  align-items: center;
+  justify-items: center;
+`;
+
+export const MainWrapper = styled.div`
+  background-color: ${({ theme }) => theme.bgPrimary};
+  color: ${({ theme }) => theme.fcPrimary};
+  min-height: 100vh;
 `;
