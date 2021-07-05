@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
@@ -9,23 +8,15 @@ import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
 import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
 import TopArtists from './Charts/BarCharts/TopArtists';
 import TopTracks from './Charts/BarCharts/TopTracks';
+import UserProfile from './UserProfile';
 
-import defaultPic from '../../public/images/default_user.png';
-
-const ImageWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
+const ChartsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: inherit;
   align-items: center;
-  background-color: ${(props) => props.theme.bgMDark};
-  border-radius: 10vh;
-  text-align: center;
-`;
-
-const UserName = styled.p`
-  font-size: 2em;
+  justify-items: center;
+  row-gap: 4em;
+  margin-top: 4em;
 `;
 
 export default function dataViews({
@@ -34,49 +25,33 @@ export default function dataViews({
   userData,
 }) {
   const dataProcessor = new DataProcessor(streamingHistory);
-  const userImage =
-    userIdentity && userIdentity.largeImageUrl ? (
-      <img
-        src={userIdentity.largeImageUrl}
-        style={{
-          borderRadius: '50%',
-          objectFit: 'cover',
-          width: '150px',
-          height: '150px',
-        }}
-      />
-    ) : (
-      <Image
-        className="rounded-image" // todo use something else the a class name for styling
-        src={defaultPic}
-        width={150}
-        height={150}
-      />
-    );
-  const userInfo = (
-    <ImageWrapper>
-      {userImage}
-      {userIdentity && userIdentity.displayName ? (
-        <UserName>{userIdentity.displayName}</UserName>
-      ) : (
-        <UserName>{userData.username}</UserName>
-      )}
-    </ImageWrapper>
-  );
+  const userImageUrl =
+    userIdentity && userIdentity.largeImageUrl
+      ? userIdentity.largeImageUrl
+      : '/images/default_user.png';
+  const userDisplayName =
+    userIdentity && userIdentity.displayName
+      ? userIdentity.displayName
+      : userData.username;
 
   return (
     <>
-      {userInfo}
+      <UserProfile
+        userImageUrl={userImageUrl}
+        userDisplayName={userDisplayName}
+      />
+      <UserStats dataProcessor={dataProcessor} />
       {/* <h2>
         Account created on{' '}
         {format(new Date(userData.creationTime), 'do MMMM yyyy')}
       </h2> */}
-      <UserStats dataProcessor={dataProcessor} />
-      <ActivityPastYear dataProcessor={dataProcessor} />
-      <TopArtists dataProcessor={dataProcessor} />
-      <TopTracks dataProcessor={dataProcessor} />
-      <DaytimeRadar dataProcessor={dataProcessor} />
-      <WeekdayRadar dataProcessor={dataProcessor} />
+      <ChartsWrapper>
+        <ActivityPastYear dataProcessor={dataProcessor} />
+        <TopArtists dataProcessor={dataProcessor} />
+        <TopTracks dataProcessor={dataProcessor} />
+        <DaytimeRadar dataProcessor={dataProcessor} />
+        <WeekdayRadar dataProcessor={dataProcessor} />
+      </ChartsWrapper>
     </>
   );
 }

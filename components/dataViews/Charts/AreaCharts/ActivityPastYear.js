@@ -12,6 +12,7 @@ import { format } from 'date-fns';
 import Select from 'react-select';
 
 import {
+  ChartAndTitleWrapper,
   ChartWrapper,
   CustomToolTipWrapper,
   getSelectStyles,
@@ -61,7 +62,7 @@ export default function ActivityPastYear({ dataProcessor }) {
   const selectStyles = getSelectStyles(theme);
 
   return (
-    <>
+    <ChartAndTitleWrapper>
       <h2>Activity past year</h2>
       <ChartWrapper>
         <AreaChart data={data}>
@@ -129,6 +130,6 @@ export default function ActivityPastYear({ dataProcessor }) {
           theme={selectTheme}
         />
       </div>
-    </>
+    </ChartAndTitleWrapper>
   );
 }

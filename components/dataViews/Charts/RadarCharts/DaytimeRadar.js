@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 
 import {
+  ChartAndTitleWrapper,
   ChartWrapper,
   CustomToolTipWrapper,
   getSelectStyles,
@@ -40,6 +41,37 @@ const DaytimeActivityTT = ({ active, payload, label, totalDays }) => {
   } else return null;
 };
 
+const options = [
+  {
+    value: 1,
+    label: 'Monday',
+  },
+  {
+    value: 2,
+    label: 'Tuesday',
+  },
+  {
+    value: 3,
+    label: 'Wednesday',
+  },
+  {
+    value: 4,
+    label: 'Thursday',
+  },
+  {
+    value: 5,
+    label: 'Friday',
+  },
+  {
+    value: 6,
+    label: 'Saturday',
+  },
+  {
+    value: 0,
+    label: 'Sunday',
+  },
+];
+
 export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
   const [weekdayFilter, setWeekdayFilter] = useState([]);
   const data = dataProcessor.getTimeslots(weekdayFilter);
@@ -48,7 +80,7 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
   const selectTheme = getSelectTheme(theme);
   const selectStyles = getSelectStyles(theme);
   return (
-    <>
+    <ChartAndTitleWrapper>
       <h2>Listening Activity related to Daytime</h2>
       <ChartWrapper>
         <RadarChart
@@ -87,36 +119,7 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
         isMulti
         noOptionsMessage={({ inputValue }) => `No result for '${inputValue}'`}
         name="artists"
-        options={[
-          {
-            value: 1,
-            label: 'Monday',
-          },
-          {
-            value: 2,
-            label: 'Tuesday',
-          },
-          {
-            value: 3,
-            label: 'Wednesday',
-          },
-          {
-            value: 4,
-            label: 'Thursday',
-          },
-          {
-            value: 5,
-            label: 'Friday',
-          },
-          {
-            value: 6,
-            label: 'Saturday',
-          },
-          {
-            value: 0,
-            label: 'Sunday',
-          },
-        ]}
+        options={options}
         onChange={(newFilter) => {
           setWeekdayFilter(newFilter.map(({ value }) => value));
         }}
@@ -124,6 +127,6 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
         styles={selectStyles}
         theme={selectTheme}
       />
-    </>
+    </ChartAndTitleWrapper>
   );
 }

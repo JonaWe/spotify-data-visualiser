@@ -10,7 +10,11 @@ import {
   Tooltip,
 } from 'recharts';
 
-import { ChartWrapper, CustomToolTipWrapper } from '../../Util/Util.elements';
+import {
+  ChartAndTitleWrapper,
+  ChartWrapper,
+  CustomToolTipWrapper,
+} from '../../Util/Util.elements';
 
 const WeekdayActivityTT = ({ active, payload, label, totalDays }) => {
   if (active && payload && payload.length) {
@@ -41,7 +45,7 @@ export default function WeekdayRadar({
   const totalDays = dataProcessor.getTotalDays();
   const theme = useContext(ThemeContext);
   return (
-    <>
+    <ChartAndTitleWrapper>
       <h2>Listening Activity related to Weekday</h2>
       <ChartWrapper>
         <RadarChart
@@ -74,6 +78,6 @@ export default function WeekdayRadar({
           />
         </RadarChart>
       </ChartWrapper>
-    </>
+    </ChartAndTitleWrapper>
   );
 }

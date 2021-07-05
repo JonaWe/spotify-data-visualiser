@@ -28,8 +28,20 @@ export const ChartWrapper = ({ children }) => {
 };
 
 export const ChartDivWrapper = styled.div`
-  width: 85%;
+  width: inherit;
   height: 80vh;
+`;
+
+export const ChartAndTitleWrapper = styled.div`
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: 85%;
+
+  h2 {
+    font-size: 2.5em;
+    text-align: center;
+  }
 `;
 
 export const getSelectStyles = (theme, minWidth = '200px') => ({

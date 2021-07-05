@@ -15,10 +15,9 @@ const MainWrapper = styled.div`
 `;
 
 const MainContent = styled.div`
-  width: 70vw;
+  width: 80vw;
   background-color: ${(props) => props.theme.bgSecondary};
   margin: 20vh 0;
-  padding: 5em;
   border-radius: 2em;
   display: grid;
   align-items: center;

@@ -2,7 +2,11 @@ import { useState, useContext } from 'react';
 import Select from 'react-select';
 import { ThemeContext } from 'styled-components';
 import PlaytimeByCategory from './PlaytimeByCategory';
-import { getSelectTheme, getSelectStyles } from '../../Util/Util.elements';
+import {
+  getSelectTheme,
+  getSelectStyles,
+  ChartAndTitleWrapper,
+} from '../../Util/Util.elements';
 
 const options = [10, 25, 50, 100].map((value) => ({ label: value, value }));
 
@@ -12,7 +16,7 @@ export default function TopArtists({ dataProcessor }) {
   const selectTheme = getSelectTheme(theme);
   const selectStyles = getSelectStyles(theme, '100px');
   return (
-    <>
+    <ChartAndTitleWrapper>
       <h2>Top {maxArtists} Artists by Playtime</h2>
       <PlaytimeByCategory
         data={dataProcessor.getTopArtists(maxArtists)}
@@ -29,6 +33,6 @@ export default function TopArtists({ dataProcessor }) {
           setMaxArtists(value);
         }}
       />
-    </>
+    </ChartAndTitleWrapper>
   );
 }
