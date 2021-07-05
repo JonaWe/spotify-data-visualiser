@@ -6,6 +6,7 @@ import {
   getSelectTheme,
   getSelectStyles,
   ChartAndTitleWrapper,
+  SelectWrapper,
 } from '../../Util/Util.elements';
 
 const options = [10, 25, 50, 100].map((value) => ({ label: value, value }));
@@ -22,17 +23,19 @@ export default function TopTracks({ dataProcessor }) {
         data={dataProcessor.getTopTracks(maxTracks)}
         category="trackName"
       />
-      <Select
-        options={options}
-        name="artistDisplayAmount"
-        defaultValue={{ label: 10, value: 10 }}
-        isSearchable={false}
-        styles={selectStyles}
-        theme={selectTheme}
-        onChange={({ value }) => {
-          setMaxTracks(value);
-        }}
-      />
+      <SelectWrapper>
+        <Select
+          options={options}
+          name="artistDisplayAmount"
+          defaultValue={{ label: 10, value: 10 }}
+          isSearchable={false}
+          styles={selectStyles}
+          theme={selectTheme}
+          onChange={({ value }) => {
+            setMaxTracks(value);
+          }}
+        />
+      </SelectWrapper>
     </ChartAndTitleWrapper>
   );
 }

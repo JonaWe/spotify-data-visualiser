@@ -17,6 +17,7 @@ import {
   CustomToolTipWrapper,
   getSelectStyles,
   getSelectTheme,
+  SelectWrapper,
 } from '../../Util/Util.elements';
 
 const PastYearActivityTT = ({ active, payload, label }) => {
@@ -65,7 +66,7 @@ export default function ActivityPastYear({ dataProcessor }) {
     <ChartAndTitleWrapper>
       <h2>Activity past year</h2>
       <ChartWrapper>
-        <AreaChart data={data}>
+        <AreaChart data={data} margin={{ left: 0, right: 30 }}>
           <CartesianGrid
             vertical={false}
             stroke={theme.bgMDark}
@@ -104,7 +105,7 @@ export default function ActivityPastYear({ dataProcessor }) {
           />
         </AreaChart>
       </ChartWrapper>
-      <div style={{ display: 'flex', columnGap: '2em' }}>
+      <SelectWrapper>
         <Select
           isMulti
           name="artists"
@@ -129,7 +130,7 @@ export default function ActivityPastYear({ dataProcessor }) {
           styles={selectStyles}
           theme={selectTheme}
         />
-      </div>
+      </SelectWrapper>
     </ChartAndTitleWrapper>
   );
 }

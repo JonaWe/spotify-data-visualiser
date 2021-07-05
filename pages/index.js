@@ -22,6 +22,10 @@ const MainContent = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
+
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
 `;
 
 export default function Home() {

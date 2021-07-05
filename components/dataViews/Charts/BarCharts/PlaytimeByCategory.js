@@ -35,7 +35,7 @@ export default function PlaytimeByCategory({ data, category }) {
   const theme = useContext(ThemeContext);
   return (
     <ChartWrapper>
-      <BarChart data={data}>
+      <BarChart data={data} margin={{ left: 0, right: 30 }}>
         <CartesianGrid
           vertical={false}
           stroke={theme.bgMDark}

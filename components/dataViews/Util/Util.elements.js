@@ -30,17 +30,38 @@ export const ChartWrapper = ({ children }) => {
 export const ChartDivWrapper = styled.div`
   width: inherit;
   height: 80vh;
+  @media screen and (max-width: 768px) {
+    height: 65vh;
+  }
 `;
 
 export const ChartAndTitleWrapper = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
-  width: 85%;
+  width: 90%;
 
   h2 {
     font-size: 2.5em;
     text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: inherit;
+  }
+`;
+
+export const SelectWrapper = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 1.5em;
+  row-gap: 0.75em;
+  margin-top: 0.5em;
+  align-items: center;
+  justify-items: center;
+
+  @media screen and (max-width: 768px) {
+    grid-auto-flow: row;
   }
 `;
 

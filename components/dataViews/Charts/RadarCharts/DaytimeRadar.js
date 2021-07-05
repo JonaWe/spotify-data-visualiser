@@ -16,6 +16,7 @@ import {
   CustomToolTipWrapper,
   getSelectStyles,
   getSelectTheme,
+  SelectWrapper,
 } from '../../Util/Util.elements';
 
 const DaytimeActivityTT = ({ active, payload, label, totalDays }) => {
@@ -115,18 +116,19 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
           />
         </RadarChart>
       </ChartWrapper>
-      <Select
-        isMulti
-        noOptionsMessage={({ inputValue }) => `No result for '${inputValue}'`}
-        name="artists"
-        options={options}
-        onChange={(newFilter) => {
-          setWeekdayFilter(newFilter.map(({ value }) => value));
-        }}
-        placeholder="Filter by Weekday..."
-        styles={selectStyles}
-        theme={selectTheme}
-      />
+      <SelectWrapper>
+        <Select
+          isMulti
+          isSearchable={false}
+          options={options}
+          onChange={(newFilter) => {
+            setWeekdayFilter(newFilter.map(({ value }) => value));
+          }}
+          placeholder="Filter by Weekday..."
+          styles={selectStyles}
+          theme={selectTheme}
+        />
+      </SelectWrapper>
     </ChartAndTitleWrapper>
   );
 }

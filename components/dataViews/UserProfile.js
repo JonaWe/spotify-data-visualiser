@@ -3,16 +3,20 @@ import styled from 'styled-components';
 const ImageWrapper = styled.div`
   display: grid;
   grid-auto-flow: column;
-  column-gap: 2em;
+  gap: 2em;
   align-items: center;
   text-align: center;
   margin: 4em 0;
+  @media screen and (max-width: 768px) {
+    grid-auto-flow: row;
+  }
 `;
 
 const UserName = styled.p`
   font-size: 3em;
   font-weight: 600;
   letter-spacing: 0.04em;
+  margin: 0;
 `;
 
 const UserImage = styled.img`

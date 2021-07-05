@@ -4,7 +4,10 @@ import NumberWithUnit from '../NumberWithUnit';
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2em 1em;
+  gap: 2.75em 5em;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export default function UserStats({ dataProcessor }) {
