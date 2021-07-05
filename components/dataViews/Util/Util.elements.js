@@ -32,11 +32,11 @@ export const ChartDivWrapper = styled.div`
   height: 80vh;
 `;
 
-export const getSelectStyles = (theme) => ({
+export const getSelectStyles = (theme, minWidth = '200px') => ({
   container: (provided, state) => ({
     ...provided,
     maxWidth: '400px',
-    minWidth: '200px',
+    minWidth: minWidth,
   }),
   menu: (provided) => ({
     ...provided,
