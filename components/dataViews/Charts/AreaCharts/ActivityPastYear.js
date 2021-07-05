@@ -112,6 +112,7 @@ export default function ActivityPastYear({ dataProcessor }) {
             setArtistFilter(newFilter.map(({ value }) => value));
           }}
           placeholder="Filter by Artist..."
+          noOptionsMessage={({ inputValue }) => `No result for '${inputValue}'`}
           styles={selectStyles}
           theme={selectTheme}
         />
@@ -123,6 +124,7 @@ export default function ActivityPastYear({ dataProcessor }) {
             setTrackFilter(newFilter.map(({ value }) => value));
           }}
           placeholder="Filter by Tracks..."
+          noOptionsMessage={({ inputValue }) => `No result for '${inputValue}'`}
           styles={selectStyles}
           theme={selectTheme}
         />

@@ -85,6 +85,7 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
       </ChartWrapper>
       <Select
         isMulti
+        noOptionsMessage={({ inputValue }) => `No result for '${inputValue}'`}
         name="artists"
         options={[
           {

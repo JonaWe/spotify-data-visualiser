@@ -46,11 +46,22 @@ export const getSelectTheme = (theme) => {
     ...t,
     colors: {
       ...t.colors,
+      neutral0: theme.bgPrimary, // main bg
+      // neutral5: theme.test, // unknown
+      neutral10: theme.bgMDark, // selected items
+      neutral20: theme.fcULight, // outline color
+      neutral30: theme.accentColor, // hover outline color
+      neutral40: theme.fcLight, // hover icon color and item not found
+      neutral50: theme.fcLight, // placeholder color
+      neutral60: theme.fcLight, // active icons color color
+      // neutral70: theme.test, // unknown
+      neutral80: theme.fcPrimary, // font color
+      // neutral90: theme.test, // unknown
       primary: theme.accentColor + 'BF',
       primary75: theme.accentColor + 'BF',
       primary50: theme.accentColor + '80',
       primary25: theme.accentColor + '40',
-      danger: theme.dangerColor + 'ff',
+      danger: theme.dangerColor,
       dangerLight: theme.dangerColor + '00',
     },
   });
