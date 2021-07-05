@@ -89,7 +89,12 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
           endAngle={-270 + angleOffset}
           data={data}
         >
-          <PolarGrid stroke={theme.bgMDark} />
+          <PolarGrid
+            stroke={theme.bgMDark}
+            strokeDasharray="3 3"
+            gridType="circle"
+            // radialLines={false}
+          />
           <PolarAngleAxis
             dataKey="hour"
             stroke={theme.bgMDark}
@@ -99,6 +104,9 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
                 ? format(new Date().setHours(value), "h aaaaa'm'")
                 : ''
             }
+            strokeWidth={2}
+            tickLine={false}
+            axisLineType="circle"
             type="category"
           />
           <Radar
@@ -106,7 +114,7 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
             stroke={theme.accentColor}
             strokeWidth={1.5}
             fill={theme.accentColor}
-            fillOpacity={0.25}
+            fillOpacity={0.1}
           />
           <Tooltip
             isAnimationActive={true}
