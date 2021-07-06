@@ -14,14 +14,16 @@ import {
   ChartAndTitleWrapper,
   ChartWrapper,
   CustomToolTipWrapper,
+  timeAmountConverter,
 } from '../../Util/Util.elements';
 
 const WeekdayActivityTT = ({ active, payload, label, totalDays }) => {
   if (active && payload && payload.length) {
     const msPlayed = payload[0].value;
-    const playtime =
-      (msPlayed / 1000 / 60 / 60 / (totalDays / 7)).toFixed(1) + ' hours';
-    const totalPlaytime = Math.round(msPlayed / 1000 / 60 / 60) + ' hours';
+    const playtime = timeAmountConverter(
+      msPlayed / 1000 / 60 / 60 / (totalDays / 7)
+    );
+    const totalPlaytime = timeAmountConverter(msPlayed / 1000 / 60 / 60);
     const weekday = format(addDays(new Date(0), label + 3), 'EEEE');
     return (
       <CustomToolTipWrapper>

@@ -19,6 +19,21 @@ export const CustomToolTipWrapper = styled.div`
   }
 `;
 
+export const timeAmountConverter = (timeInHours) => {
+  const seconds = Math.round((((timeInHours % 1) * 60) % 1) * 60);
+  const minutes = Math.floor((timeInHours % 1) * 60);
+  const hours = Math.floor(timeInHours);
+  return hours === 0
+    ? minutes !== 0
+      ? minutes < 15
+        ? `${minutes} minutes ${seconds} seconds`
+        : `${minutes} minutes`
+      : `${seconds} seconds`
+    : hours < 10 && minutes !== 0
+    ? `${hours} hours ${minutes} minutes`
+    : `${hours} hours`;
+};
+
 export const ChartWrapper = ({ children }) => {
   return (
     <ChartDivWrapper>

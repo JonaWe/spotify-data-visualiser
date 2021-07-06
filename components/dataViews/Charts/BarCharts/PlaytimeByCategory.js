@@ -11,11 +11,15 @@ import {
 import { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
 
-import { ChartWrapper, CustomToolTipWrapper } from '../../Util/Util.elements';
+import {
+  ChartWrapper,
+  CustomToolTipWrapper,
+  timeAmountConverter,
+} from '../../Util/Util.elements';
 
 const PlayTimeByCategoryTT = ({ active, payload, label, category }) => {
   if (active && payload && payload.length) {
-    const totalPlaytime = `${Math.round(payload[0].value)} hours`;
+    const totalPlaytime = timeAmountConverter(payload[0].value);
     return (
       <CustomToolTipWrapper>
         <h3>{label}</h3>

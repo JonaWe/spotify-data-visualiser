@@ -17,13 +17,21 @@ import {
   getSelectStyles,
   getSelectTheme,
   SelectWrapper,
+  timeAmountConverter,
 } from '../../Util/Util.elements';
 
-const DaytimeActivityTT = ({ active, payload, label, totalDays }) => {
+const DaytimeActivityTT = ({
+  active,
+  payload,
+  label,
+  totalDays,
+  filterLength,
+}) => {
   if (active && payload && payload.length) {
     const msPlayed = payload[0].value;
-    const playtime = format(msPlayed / totalDays, "m.s' minutes'");
-    const totalPlaytime = Math.round(msPlayed / 1000 / 60 / 60) + ' hours';
+    totalDays = (totalDays / 7) * (filterLength === 0 ? 7 : filterLength);
+    const playtime = timeAmountConverter(msPlayed / 1000 / 60 / 60 / totalDays);
+    const totalPlaytime = timeAmountConverter(msPlayed / 1000 / 60 / 60);
     const startTime = format(new Date().setHours(label), "h aaaaa'm'");
     const endTime = format(new Date().setHours(label + 1), "h aaaaa'm'");
     return (
@@ -120,7 +128,12 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
             isAnimationActive={true}
             animationEasing="ease-out"
             animationDuration={200}
-            content={<DaytimeActivityTT totalDays={totalDays} />}
+            content={
+              <DaytimeActivityTT
+                totalDays={totalDays}
+                filterLength={weekdayFilter.length}
+              />
+            }
           />
         </RadarChart>
       </ChartWrapper>

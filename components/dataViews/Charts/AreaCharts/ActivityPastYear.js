@@ -18,19 +18,13 @@ import {
   getSelectStyles,
   getSelectTheme,
   SelectWrapper,
+  timeAmountConverter,
 } from '../../Util/Util.elements';
 
 const PastYearActivityTT = ({ active, payload, label }) => {
   if (active && payload && payload.length && label) {
+    const listeningTime = timeAmountConverter(payload[0].value);
     const displayTime = format(label, 'MMMM, yyyy');
-    let listeningTime = payload[0].value;
-    listeningTime = `${
-      listeningTime < 1
-        ? Math.round(listeningTime * 60)
-        : listeningTime < 15
-        ? listeningTime.toFixed(1)
-        : Math.round(listeningTime)
-    } ${listeningTime < 1 ? 'minutes' : 'hours'}`;
     return (
       <CustomToolTipWrapper>
         <h3>{displayTime}</h3>
