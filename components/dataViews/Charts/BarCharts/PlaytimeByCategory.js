@@ -45,8 +45,13 @@ export default function PlaytimeByCategory({ data, category }) {
           tick={{ fill: theme.fcLight }}
           stroke={theme.bgMDark}
           dataKey={category}
+          type="category"
         />
-        <YAxis tick={{ fill: theme.fcLight }} stroke={theme.bgMDark} />
+        <YAxis
+          type="number"
+          tick={{ fill: theme.fcLight }}
+          stroke={theme.bgMDark}
+        />
         <Tooltip
           cursor={{ fill: theme.accentColor, fillOpacity: 0.1 }}
           isAnimationActive={true}
@@ -54,11 +59,30 @@ export default function PlaytimeByCategory({ data, category }) {
           animationDuration={200}
           content={<PlayTimeByCategoryTT category={category} />}
         />
-        <Legend />
+        <Legend
+          formatter={(value) => (
+            <span style={{ color: theme.accentColor }}>{value}</span>
+          )}
+        />
+        <defs>
+          <linearGradient id="linGradient2" x1="0" y1="0" x2="1" y2="1">
+            <stop
+              offset="10%"
+              stopColor={theme.accentColor}
+              stopOpacity={0.9}
+            />
+            <stop
+              offset="90%"
+              stopColor={theme.accentColor}
+              stopOpacity={0.65}
+            />
+          </linearGradient>
+        </defs>
         <Bar
           name="Hours spent listening"
           dataKey="hoursPlayed"
-          fill={theme.accentColor}
+          fill="url(#linGradient2)"
+          radius={[5, 5, 0, 0]}
         />
       </BarChart>
     </ChartWrapper>

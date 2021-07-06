@@ -6,6 +6,8 @@ export const CustomToolTipWrapper = styled.div`
   border-radius: 0.35em;
   background-color: ${({ theme }) => theme.fcPrimary}C0;
   color: ${({ theme }) => theme.bgDark};
+  max-width: 40vw;
+  word-wrap: break-word;
   /* backdrop-filter: blur(3px); */
   @media screen and (max-width: 768px) {
     h3 {
