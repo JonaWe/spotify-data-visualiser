@@ -24,7 +24,7 @@ import {
 const PastYearActivityTT = ({ active, payload, label }) => {
   if (active && payload && payload.length && label) {
     const listeningTime = timeAmountConverter(payload[0].value);
-    const displayTime = format(label, 'MMMM, yyyy');
+    const displayTime = format(label, 'd. MMMM yyyy');
     return (
       <CustomToolTipWrapper>
         <h3>{displayTime}</h3>
@@ -91,7 +91,7 @@ export default function ActivityPastYear({ dataProcessor }) {
           </defs>
           <Area
             type="monotone"
-            dataKey="hours"
+            dataKey="msPlayed"
             stroke={theme.accentColor}
             strokeWidth={2}
             fill={'url(#linGradient)'}
