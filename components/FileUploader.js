@@ -51,8 +51,6 @@ export default function FileUploader({
       accept: '.zip',
     });
 
-  console.log(acceptedFiles, fileRejections);
-
   return (
     <>
       <Title>Spotify User Data Visualizer</Title>
