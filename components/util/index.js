@@ -96,6 +96,7 @@ export const UploadCard = styled.div`
   background-color: ${(props) => props.theme.bgSecondary};
   border-radius: 2em;
   padding: 2em;
+  margin: 0 5vw;
 `;
 
 export const UploadCardTitle = styled.h2`
@@ -124,5 +125,10 @@ export const DragZone = styled.div`
   color: ${(props) => props.theme.fcLight};
   border: dotted 2px ${(props) => props.theme.bgMDark};
   border-radius: 1em;
-  padding: 6em 12em;
+  padding: 10vh 10vw;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    padding: 5vh 5vw;
+  }
 `;
