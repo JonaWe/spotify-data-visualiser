@@ -21,10 +21,23 @@ import {
   timeAmountConverter,
 } from '../../Util/Util.elements';
 
-const PastYearActivityTT = ({ active, payload, label }) => {
+const PastYearActivityTT = ({ active, payload, label, accuracy }) => {
   if (active && payload && payload.length && label) {
     const listeningTime = timeAmountConverter(payload[0].value);
-    const displayTime = format(label, 'd. MMMM yyyy');
+    let displayTime;
+    switch (accuracy) {
+      case 'days':
+        displayTime = format(label, 'd. MMMM yyyy');
+        break;
+
+      case 'weeks':
+        displayTime = format(label, "Io 'week of' yyyy");
+        break;
+
+      case 'months':
+        displayTime = format(label, 'MMMM, yyyy');
+        break;
+    }
     return (
       <CustomToolTipWrapper>
         <h3>{displayTime}</h3>
@@ -35,12 +48,17 @@ const PastYearActivityTT = ({ active, payload, label }) => {
     );
   } else return null;
 };
+const accuracyOptions = ['Days', 'Weeks', 'Months'].map((value) => ({
+  label: value,
+  value: value.toLowerCase(),
+}));
 
 export default function ActivityPastYear({ dataProcessor }) {
   const theme = useContext(ThemeContext);
 
   const [artistFilter, setArtistFilter] = useState([]);
   const [trackFilter, setTrackFilter] = useState([]);
+  const [accuracy, setAccuracy] = useState('weeks');
 
   const allTracks = dataProcessor
     .getAllTrackNames()
@@ -49,7 +67,11 @@ export default function ActivityPastYear({ dataProcessor }) {
     .getAllArtistNames()
     .map((name) => ({ value: name, label: name }));
 
-  let data = dataProcessor.getPlaytimeOverYear(artistFilter, trackFilter);
+  let data = dataProcessor.getPlaytimeOverYear(
+    artistFilter,
+    trackFilter,
+    accuracy
+  );
   if (!(data && data.length && data.length !== 0))
     data = [{ date: new Date(), hours: 0 }];
 
@@ -77,7 +99,7 @@ export default function ActivityPastYear({ dataProcessor }) {
             isAnimationActive={true}
             animationEasing="ease-out"
             animationDuration={200}
-            content={<PastYearActivityTT />}
+            content={<PastYearActivityTT accuracy={accuracy} />}
           />
           <defs>
             <linearGradient id="linGradient" x1="0" y1="0" x2="0" y2="1">
@@ -91,7 +113,7 @@ export default function ActivityPastYear({ dataProcessor }) {
           </defs>
           <Area
             type="monotone"
-            dataKey="msPlayed"
+            dataKey="hoursPlayed"
             stroke={theme.accentColor}
             strokeWidth={2}
             fill={'url(#linGradient)'}
@@ -123,6 +145,16 @@ export default function ActivityPastYear({ dataProcessor }) {
           noOptionsMessage={({ inputValue }) => `No result for '${inputValue}'`}
           styles={selectStyles}
           theme={selectTheme}
+        />
+        <Select
+          options={accuracyOptions}
+          defaultValue={accuracyOptions[1]}
+          isSearchable={false}
+          styles={selectStyles}
+          theme={selectTheme}
+          onChange={({ value }) => {
+            setAccuracy(value);
+          }}
         />
       </SelectWrapper>
     </ChartAndTitleWrapper>
