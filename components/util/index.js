@@ -41,6 +41,7 @@ export const CenterdGridWrapper = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
+  padding-bottom: 10vh;
 `;
 
 export const MainWrapper = styled.div`
@@ -58,7 +59,7 @@ export const Card = styled.div`
   padding: 2em;
   width: 250px;
   @media screen and (max-width: 768px) {
-    width: 70vw;
+    max-width: 70vw;
   }
 `;
 
@@ -84,7 +85,7 @@ export const CardWrapper = styled.div`
   grid-auto-flow: column;
   gap: 5em;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1200px) {
     grid-auto-flow: row;
   }
 `;
@@ -130,5 +131,10 @@ export const DragZone = styled.div`
 
   @media screen and (max-width: 768px) {
     padding: 5vh 5vw;
+  }
+
+  p {
+    font-size: 1.25em;
+    font-style: italic;
   }
 `;
