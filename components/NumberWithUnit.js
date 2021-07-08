@@ -70,6 +70,7 @@ export default function NumberWithUnit({
               ? 0
               : 2
           }
+          thousandsSeparator=","
         />
       </Value>
       <Label>{label}</Label>
