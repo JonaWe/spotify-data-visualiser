@@ -22,25 +22,37 @@ export default function FileUploader({
   userIdentity,
 }) {
   const [failed, setFailed] = useState(false);
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = useCallback(async ([acceptedFile]) => {
     setFailed(false);
-    const rawStreamingHistory = [];
 
-    acceptedFiles.forEach(async (file) => {
-      const zip = await JSZip.loadAsync(file);
-      zip.forEach(async (relativePath, zipEntry) => {
-        if (/StreamingHistory[0-9]+.json$/.test(zipEntry.name)) {
-          const jsonText = await zipEntry.async('text');
-          const streamingHistoryPart = JSON.parse(jsonText);
-          rawStreamingHistory.push(...streamingHistoryPart);
-          setStreamingHistory(rawStreamingHistory);
-        } else if (/Identity.json$/.test(zipEntry.name)) {
-          setUserIdentity(JSON.parse(await zipEntry.async('text')));
-        } else if (/Userdata.json$/.test(zipEntry.name)) {
-          setUserdata(JSON.parse(await zipEntry.async('text')));
-        }
-      });
+    const zip = await JSZip.loadAsync(acceptedFile);
+    const streamingHistoryPromises = [];
+    let userIdentityPromise;
+    let userDataPromise;
+
+    zip.forEach((relativePath, zipEntry) => {
+      const data = zipEntry.async('text');
+      if (/StreamingHistory[0-9]+.json$/.test(zipEntry.name)) {
+        streamingHistoryPromises.push(data);
+      } else if (/Identity.json$/.test(zipEntry.name)) {
+        userIdentityPromise = data;
+      } else if (/Userdata.json$/.test(zipEntry.name)) {
+        userDataPromise = data;
+      }
     });
+
+    const streamingHistory = (await Promise.all(streamingHistoryPromises))
+      .map((data) => JSON.parse(data))
+      .reduce((all, current) => [...all, ...current], []);
+    const userIdentity = JSON.parse(await userIdentityPromise);
+    const userData = JSON.parse(await userDataPromise);
+
+    if (userIdentity) setUserIdentity(userIdentity);
+    if (userData) setUserdata(userData);
+    setStreamingHistory(streamingHistory);
+
+    if (streamingHistory && (userIdentityPromise || userDataPromise))
+      setProcessingFinished(true);
   });
 
   const { getRootProps, getInputProps, open, acceptedFiles, fileRejections } =
