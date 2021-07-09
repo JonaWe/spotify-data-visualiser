@@ -1,9 +1,10 @@
 import JSZip from 'jszip';
 import Link from 'next/link';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
+import Loader from 'react-loader-spinner';
+import { ThemeContext } from 'styled-components';
 import {
-  Button,
   DragZone,
   HighlightedCardDescription,
   Title,
@@ -17,12 +18,12 @@ export default function FileUploader({
   setUserIdentity,
   setUserdata,
   setProcessingFinished,
-  streamingHistory,
-  userData,
-  userIdentity,
 }) {
+  const theme = useContext(ThemeContext);
   const [failed, setFailed] = useState(false);
   const onDrop = useCallback(async ([acceptedFile]) => {
+    if (!acceptedFile) return;
+
     setFailed(false);
 
     const zip = await JSZip.loadAsync(acceptedFile);
@@ -30,7 +31,7 @@ export default function FileUploader({
     let userIdentityPromise;
     let userDataPromise;
 
-    zip.forEach((relativePath, zipEntry) => {
+    zip.forEach((_, zipEntry) => {
       const data = zipEntry.async('text');
       if (/StreamingHistory[0-9]+.json$/.test(zipEntry.name)) {
         streamingHistoryPromises.push(data);
@@ -44,18 +45,23 @@ export default function FileUploader({
     const streamingHistory = (await Promise.all(streamingHistoryPromises))
       .map((data) => JSON.parse(data))
       .reduce((all, current) => [...all, ...current], []);
-    const userIdentity = JSON.parse(await userIdentityPromise);
-    const userData = JSON.parse(await userDataPromise);
+    let userIdentity;
+    if (userIdentityPromise)
+      userIdentity = JSON.parse(await userIdentityPromise);
+    let userData;
+    if (userDataPromise) userData = JSON.parse(await userDataPromise);
 
-    if (userIdentity) setUserIdentity(userIdentity);
-    if (userData) setUserdata(userData);
-    setStreamingHistory(streamingHistory);
-
-    if (streamingHistory && (userIdentityPromise || userDataPromise))
+    if (streamingHistory && (userIdentityPromise || userDataPromise)) {
+      if (userIdentity) setUserIdentity(userIdentity);
+      if (userData) setUserdata(userData);
+      setStreamingHistory(streamingHistory);
       setProcessingFinished(true);
+    } else {
+      setFailed(true);
+    }
   });
 
-  const { getRootProps, getInputProps, open, acceptedFiles, fileRejections } =
+  const { getRootProps, getInputProps, acceptedFiles, fileRejections } =
     useDropzone({
       noKeyboard: true,
       maxFiles: 1,
@@ -63,13 +69,21 @@ export default function FileUploader({
       accept: '.zip',
     });
 
+  if (acceptedFiles.length !== 0 && !failed)
+    return (
+      <Loader
+        type="ThreeDots"
+        color={theme.accentColor}
+        height={100}
+        width={100}
+      />
+    );
+
   return (
     <>
       <Title>Spotify User Data Visualizer</Title>
       <UploadCard>
-        <UploadCardTitle>
-          File Transfer {acceptedFiles.length === 0 ? 'Pending' : 'Complete'}
-        </UploadCardTitle>
+        <UploadCardTitle>File Transfer Pending</UploadCardTitle>
         <UploadCardDescription>
           Next, you need to upload your Spotify user data to start the analysis.
           <br />
@@ -88,60 +102,43 @@ export default function FileUploader({
           </Link>{' '}
           about data protection.
         </UploadCardDescription>
-        {acceptedFiles.length === 0 || failed ? (
-          <>
-            {fileRejections.length !== 0 || failed ? (
-              <UploadCardDescription>
-                {failed ? (
+        <>
+          {(fileRejections.length !== 0 || failed) && (
+            <UploadCardDescription>
+              {failed ? (
+                <>
                   <HighlightedCardDescription warning>
                     The content of the zip file is invalid!
                   </HighlightedCardDescription>
-                ) : (
-                  <>
+                  <br />
+                  This usually means that you have selected the wrong file.
+                </>
+              ) : (
+                <>
+                  <HighlightedCardDescription warning>
                     Failed to Load:
-                    <br />
-                    {fileRejections.map(
-                      ({ file: { name }, errors: [{ message }] }) => (
-                        <>
-                          <HighlightedCardDescription>
-                            {name}
-                          </HighlightedCardDescription>{' '}
-                          - {message}
-                        </>
-                      )
-                    )}
-                  </>
-                )}
-              </UploadCardDescription>
-            ) : null}
-            <DragZone {...getRootProps({ className: 'dropzone' })}>
-              <input {...getInputProps()} />
-              <p>
-                Click anywhere or drag 'n' drop to load the userdata zip file
-              </p>
-            </DragZone>
-          </>
-        ) : (
-          <>
-            <UploadCardDescription>
-              Successfully Loaded:{' '}
-              <HighlightedCardDescription>
-                {acceptedFiles.map(({ name }) => name)}
-              </HighlightedCardDescription>
+                  </HighlightedCardDescription>
+                  <br />
+                  {fileRejections.map(
+                    ({ file: { name: fileName }, errors: [{ message }] }) => (
+                      <span key={fileName}>
+                        <HighlightedCardDescription>
+                          {fileName}
+                        </HighlightedCardDescription>{' '}
+                        - {message}
+                        <br />
+                      </span>
+                    )
+                  )}
+                </>
+              )}
             </UploadCardDescription>
-            <br />
-            <Button
-              primary
-              onClick={() => {
-                if (streamingHistory && (userIdentity || userData))
-                  setProcessingFinished(true);
-                else setFailed(true);
-              }}
-            >
-              Analyse File
-            </Button>
-          </>
-        )}
+          )}
+          <DragZone {...getRootProps({ className: 'dropzone' })}>
+            <input {...getInputProps()} />
+            <p>Click anywhere or drag 'n' drop to load the userdata zip file</p>
+          </DragZone>
+        </>
       </UploadCard>
     </>
   );

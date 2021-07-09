@@ -35,9 +35,6 @@ export default function Home() {
             setUserIdentity={setUserIdentity}
             setUserdata={setUserdata}
             setProcessingFinished={setProcessingFinished}
-            streamingHistory={streamingHistory}
-            userData={userData}
-            userIdentity={userIdentity}
           />
         ) : (
           <>
