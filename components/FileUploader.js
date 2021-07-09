@@ -26,7 +26,14 @@ export default function FileUploader({
 
     setFailed(false);
 
-    const zip = await JSZip.loadAsync(acceptedFile);
+    let zip;
+    try {
+      zip = await JSZip.loadAsync(acceptedFile);
+    } catch {
+      setFailed(true);
+      return;
+    }
+
     const streamingHistoryPromises = [];
     let userIdentityPromise;
     let userDataPromise;
@@ -67,6 +74,7 @@ export default function FileUploader({
       maxFiles: 1,
       onDrop,
       accept: '.zip',
+      maxSize: 30_000_000,
     });
 
   if (acceptedFiles.length !== 0 && !failed)
