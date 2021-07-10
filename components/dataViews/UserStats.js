@@ -26,7 +26,7 @@ export default function UserStats({ dataProcessor }) {
         unit="hours"
       />
       <NumberWithUnit
-        label="Average Song Duration"
+        label="Average Song Playtime"
         value={dataProcessor.getAverageSongPlaytime()}
         unit="minutes"
       />

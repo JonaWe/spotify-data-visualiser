@@ -77,7 +77,7 @@ export const SelectWrapper = styled.div`
   align-items: center;
   justify-items: center;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     grid-auto-flow: row;
   }
 `;
