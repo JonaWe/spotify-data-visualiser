@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-import { format } from 'date-fns';
-
-import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
 import DataProcessor from '../../lib/DataProcessor';
-import UserStats from './UserStats';
-import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
-import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
+import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
 import TopArtists from './Charts/BarCharts/TopArtists';
 import TopTracks from './Charts/BarCharts/TopTracks';
+import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
+import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
 import UserProfile from './UserProfile';
+import UserStats from './UserStats';
 
 const ChartsWrapper = styled.div`
   display: grid;

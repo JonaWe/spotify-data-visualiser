@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import NumberWithUnit from '../NumberWithUnit';
+import NumberWithUnit from '../util/NumberWithUnit';
 
 const Wrapper = styled.div`
   display: grid;

@@ -1,15 +1,14 @@
 import { format } from 'date-fns';
-import { ThemeContext } from 'styled-components';
 import { useContext, useState } from 'react';
 import Select from 'react-select';
 import {
+  PolarAngleAxis,
+  PolarGrid,
   Radar,
   RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
   Tooltip,
 } from 'recharts';
-
+import { ThemeContext } from 'styled-components';
 import {
   ChartAndTitleWrapper,
   ChartWrapper,

@@ -1,16 +1,14 @@
+import { useContext } from 'react';
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
 } from 'recharts';
-
 import { ThemeContext } from 'styled-components';
-import { useContext } from 'react';
-
 import {
   ChartWrapper,
   CustomToolTipWrapper,

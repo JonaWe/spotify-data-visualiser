@@ -1,15 +1,13 @@
-import { format, addDays } from 'date-fns';
-import { ThemeContext } from 'styled-components';
+import { addDays, format } from 'date-fns';
 import { useContext } from 'react';
 import {
+  PolarAngleAxis,
+  PolarGrid,
   Radar,
   RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  ResponsiveContainer,
   Tooltip,
 } from 'recharts';
-
+import { ThemeContext } from 'styled-components';
 import {
   ChartAndTitleWrapper,
   ChartWrapper,

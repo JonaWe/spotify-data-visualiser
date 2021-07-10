@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import DataViews from '../dataViews';
 import {
+  Button,
   CenterdGridWrapper,
+  MainContent,
   MainWrapper,
   Title,
-  MainContent,
-  Button,
 } from '../util';
 
 export default function Datapage({ streamingHistory, userIdentity, userData }) {

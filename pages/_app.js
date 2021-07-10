@@ -1,8 +1,8 @@
-import { ThemeProvider } from 'styled-components';
 import Head from 'next/head';
-import '../styles/globals.css';
-import theme from '../config/theme';
+import { ThemeProvider } from 'styled-components';
 import Footer from '../components/Footer';
+import theme from '../config/theme';
+import '../styles/globals.css';
 
 export default function MyApp({ Component, pageProps }) {
   return (

@@ -1,6 +1,5 @@
-import { CountUp } from 'use-count-up';
-import { format } from 'd3-format';
 import styled from 'styled-components';
+import { CountUp } from 'use-count-up';
 
 const Wrapper = styled.div`
   display: grid;

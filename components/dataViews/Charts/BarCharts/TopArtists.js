@@ -1,13 +1,13 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import Select from 'react-select';
 import { ThemeContext } from 'styled-components';
-import PlaytimeByCategory from './PlaytimeByCategory';
 import {
-  getSelectTheme,
-  getSelectStyles,
   ChartAndTitleWrapper,
+  getSelectStyles,
+  getSelectTheme,
   SelectWrapper,
 } from '../../Util/Util.elements';
+import PlaytimeByCategory from './PlaytimeByCategory';
 
 const options = [10, 25, 50, 100].map((value) => ({ label: value, value }));
 

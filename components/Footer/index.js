@@ -1,6 +1,5 @@
-import styled from 'styled-components';
-
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import styled from 'styled-components';
 import SocialLink from './SocialLink';
 
 const FooterBox = styled.footer`

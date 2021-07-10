@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import {
   Button,
+  Card,
+  CardDescription,
+  CardTitle,
+  CardWrapper,
   CenterdGridWrapper,
   MainWrapper,
   Title,
-  Card,
-  CardTitle,
-  CardDescription,
-  CardWrapper,
 } from '../components/util';
 
 export default function Home() {

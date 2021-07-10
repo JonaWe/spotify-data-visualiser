@@ -1,16 +1,15 @@
+import { format } from 'date-fns';
+import { useContext, useState } from 'react';
+import Select from 'react-select';
 import {
-  AreaChart,
   Area,
-  XAxis,
-  YAxis,
+  AreaChart,
   CartesianGrid,
   Tooltip,
+  XAxis,
+  YAxis,
 } from 'recharts';
 import { ThemeContext } from 'styled-components';
-import { useContext, useState } from 'react';
-import { format } from 'date-fns';
-import Select from 'react-select';
-
 import {
   ChartAndTitleWrapper,
   ChartWrapper,

@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Button, CenterdGridWrapper, MainWrapper } from '../components/util';
 

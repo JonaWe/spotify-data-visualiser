@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
 import Link from 'next/link';
-import { useCallback, useState, useContext } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Loader from 'react-loader-spinner';
 import { ThemeContext } from 'styled-components';
@@ -11,7 +11,7 @@ import {
   UploadCard,
   UploadCardDescription,
   UploadCardTitle,
-} from './util';
+} from '../util';
 
 export default function FileUploader({
   setStreamingHistory,

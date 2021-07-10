@@ -1,15 +1,7 @@
 import { useState } from 'react';
-
-import FileUploader from '../components/FileUploader';
-import DataViews from '../components/dataViews';
-
-import {
-  CenterdGridWrapper,
-  MainWrapper,
-  Title,
-  MainContent,
-} from '../components/util';
 import Datapage from '../components/pageContents/Datapage';
+import FileUploader from '../components/pageContents/FileUploader';
+import { CenterdGridWrapper, MainWrapper } from '../components/util';
 
 export default function Home() {
   const [streamingHistory, setStreamingHistory] = useState([]);
@@ -20,7 +12,7 @@ export default function Home() {
   return (
     <MainWrapper>
       <CenterdGridWrapper>
-        {streamingHistory.length === 0 || !processingFinished ? (
+        {!processingFinished ? (
           <FileUploader
             setStreamingHistory={setStreamingHistory}
             setUserIdentity={setUserIdentity}
