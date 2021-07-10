@@ -52,6 +52,9 @@ export default function Home() {
             </Link>
           </Card>
         </CardWrapper>
+        <Link href="/demo">
+          <Button primary>View Demodata</Button>
+        </Link>
       </CenterdGridWrapper>
     </MainWrapper>
   );

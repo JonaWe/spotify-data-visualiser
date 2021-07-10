@@ -3,22 +3,13 @@ import { useState } from 'react';
 import FileUploader from '../components/FileUploader';
 import DataViews from '../components/dataViews';
 
-import styled from 'styled-components';
-import { CenterdGridWrapper, MainWrapper, Title } from '../components/util';
-
-const MainContent = styled.div`
-  width: 80vw;
-  background-color: ${(props) => props.theme.bgSecondary};
-  margin-bottom: 15vh;
-  border-radius: 2em;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-
-  @media screen and (max-width: 768px) {
-    width: 100vw;
-  }
-`;
+import {
+  CenterdGridWrapper,
+  MainWrapper,
+  Title,
+  MainContent,
+} from '../components/util';
+import Datapage from '../components/pageContents/Datapage';
 
 export default function Home() {
   const [streamingHistory, setStreamingHistory] = useState([]);
@@ -37,16 +28,11 @@ export default function Home() {
             setProcessingFinished={setProcessingFinished}
           />
         ) : (
-          <>
-            <Title>Your Spotify Stats for the Past Year</Title>
-            <MainContent>
-              <DataViews
-                streamingHistory={streamingHistory}
-                userIdentity={userIdentity}
-                userData={userData}
-              />
-            </MainContent>
-          </>
+          <Datapage
+            streamingHistory={streamingHistory}
+            userIdentity={userIdentity}
+            userData={userData}
+          />
         )}
       </CenterdGridWrapper>
     </MainWrapper>

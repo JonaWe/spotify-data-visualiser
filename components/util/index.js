@@ -138,3 +138,17 @@ export const DragZone = styled.div`
     font-style: italic;
   }
 `;
+
+export const MainContent = styled.div`
+  width: 80vw;
+  background-color: ${(props) => props.theme.bgSecondary};
+  margin-bottom: 15vh;
+  border-radius: 2em;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
+`;
