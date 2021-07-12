@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Select from 'react-select';
 import {
   Area,
@@ -10,6 +10,7 @@ import {
   YAxis,
 } from 'recharts';
 import { ThemeContext } from 'styled-components';
+import CustomLoader from '../../Util/CustomLoader';
 import {
   ChartAndTitleWrapper,
   ChartWrapper,
@@ -58,23 +59,34 @@ export default function ActivityPastYear({ dataProcessor }) {
   const [artistFilter, setArtistFilter] = useState([]);
   const [trackFilter, setTrackFilter] = useState([]);
   const [accuracy, setAccuracy] = useState('weeks');
+  const [data, setData] = useState(null);
+  const [allTracks, setAllTracks] = useState(null);
+  const [allArtists, setAllArtists] = useState(null);
 
-  const allTracks = dataProcessor
-    .getAllTrackNames()
-    .slice(0, 100)
-    .map((name) => ({ value: name, label: name }));
-  const allArtists = dataProcessor
-    .getAllArtistNames()
-    .slice(0, 100)
-    .map((name) => ({ value: name, label: name }));
+  useEffect(() => {
+    setData(
+      dataProcessor.getPlaytimeOverYear(artistFilter, trackFilter, accuracy)
+    );
+  }, [artistFilter, trackFilter, accuracy]);
 
-  let data = dataProcessor.getPlaytimeOverYear(
-    artistFilter,
-    trackFilter,
-    accuracy
-  );
-  if (!(data && data.length && data.length !== 0))
-    data = [{ date: new Date(), hours: 0 }];
+  useEffect(() => {
+    setAllTracks(
+      dataProcessor
+        .getAllTrackNames()
+        .slice(0, 100)
+        .map((name) => ({ value: name, label: name }))
+    );
+    setAllArtists(
+      dataProcessor
+        .getAllArtistNames()
+        .slice(0, 100)
+        .map((name) => ({ value: name, label: name }))
+    );
+  }, []);
+
+  if (!data || !allArtists || !allTracks) {
+    return <CustomLoader />;
+  }
 
   const selectTheme = getSelectTheme(theme);
   const selectStyles = getSelectStyles(theme);

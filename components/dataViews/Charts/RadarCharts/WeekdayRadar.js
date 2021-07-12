@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { addDays, format } from 'date-fns';
 import { useContext } from 'react';
 import {
@@ -14,6 +15,7 @@ import {
   CustomToolTipWrapper,
   timeAmountConverter,
 } from '../../Util/Util.elements';
+import CustomLoader from '../../Util/CustomLoader';
 
 const WeekdayActivityTT = ({ active, payload, label, totalDays }) => {
   if (active && payload && payload.length) {
@@ -41,8 +43,18 @@ export default function WeekdayRadar({
   dataProcessor,
   angleOffset = (360 / 7) * 1,
 }) {
-  const data = dataProcessor.getWeekdays();
-  const totalDays = dataProcessor.getTotalDays();
+  const [data, setData] = useState(null);
+  const [totalDays, setTotalDays] = useState(null);
+
+  useEffect(() => {
+    setData(dataProcessor.getWeekdays());
+    setTotalDays(dataProcessor.getTotalDays());
+  }, []);
+
+  if (!data) {
+    return <CustomLoader />;
+  }
+
   const theme = useContext(ThemeContext);
   return (
     <ChartAndTitleWrapper>

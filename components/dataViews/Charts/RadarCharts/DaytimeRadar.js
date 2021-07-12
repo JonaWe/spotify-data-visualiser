@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Select from 'react-select';
 import {
   PolarAngleAxis,
@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from 'recharts';
 import { ThemeContext } from 'styled-components';
+import CustomLoader from '../../Util/CustomLoader';
 import {
   ChartAndTitleWrapper,
   ChartWrapper,
@@ -81,12 +82,26 @@ const options = [
 ];
 
 export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
-  const [weekdayFilter, setWeekdayFilter] = useState([]);
-  const data = dataProcessor.getTimeslots(weekdayFilter);
-  const totalDays = dataProcessor.getTotalDays();
   const theme = useContext(ThemeContext);
+  const [weekdayFilter, setWeekdayFilter] = useState([]);
+  const [data, setData] = useState(null);
+  const [totalDays, setTotalDays] = useState(null);
+
+  useEffect(() => {
+    setTotalDays(dataProcessor.getTotalDays());
+  }, []);
+
+  useEffect(() => {
+    setData(dataProcessor.getTimeslots(weekdayFilter));
+  }, [weekdayFilter]);
+
+  if (!data) {
+    return <CustomLoader />;
+  }
+
   const selectTheme = getSelectTheme(theme);
   const selectStyles = getSelectStyles(theme);
+
   return (
     <ChartAndTitleWrapper>
       <h2>Listening Activity related to Daytime</h2>

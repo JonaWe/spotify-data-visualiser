@@ -19,6 +19,15 @@ export const CustomToolTipWrapper = styled.div`
   }
 `;
 
+export const StatWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.75em 5em;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 export const timeAmountConverter = (timeInHours) => {
   const seconds = Math.round((((timeInHours % 1) * 60) % 1) * 60);
   const minutes = Math.floor((timeInHours % 1) * 60);

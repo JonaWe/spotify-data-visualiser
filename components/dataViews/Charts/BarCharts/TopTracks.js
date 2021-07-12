@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Select from 'react-select';
 import { ThemeContext } from 'styled-components';
+import CustomLoader from '../../Util/CustomLoader';
 import {
   ChartAndTitleWrapper,
   getSelectStyles,
@@ -13,16 +14,22 @@ const options = [10, 25, 50, 100].map((value) => ({ label: value, value }));
 
 export default function TopTracks({ dataProcessor }) {
   const [maxTracks, setMaxTracks] = useState(10);
+
   const theme = useContext(ThemeContext);
   const selectTheme = getSelectTheme(theme);
   const selectStyles = getSelectStyles(theme, '100px');
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    setData(dataProcessor.getTopTracks(maxTracks));
+  }, [maxTracks]);
+
+  if (!data) return <CustomLoader />;
   return (
     <ChartAndTitleWrapper>
       <h2>Top {maxTracks} Tracks by Playtime</h2>
-      <PlaytimeByCategory
-        data={dataProcessor.getTopTracks(maxTracks)}
-        category="trackName"
-      />
+      <PlaytimeByCategory data={data} category="trackName" />
       <SelectWrapper>
         <Select
           options={options}

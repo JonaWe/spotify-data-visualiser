@@ -33,6 +33,7 @@ const PlayTimeByCategoryTT = ({ active, payload, label, category }) => {
     );
   } else return null;
 };
+
 export default function PlaytimeByCategory({ data, category }) {
   const theme = useContext(ThemeContext);
   return (

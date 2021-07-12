@@ -1,9 +1,8 @@
 import JSZip from 'jszip';
 import Link from 'next/link';
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import Loader from 'react-loader-spinner';
-import { ThemeContext } from 'styled-components';
+import CustomLoader from '../dataViews/Util/CustomLoader';
 import {
   DragZone,
   HighlightedCardDescription,
@@ -19,7 +18,6 @@ export default function FileUploader({
   setUserdata,
   setProcessingFinished,
 }) {
-  const theme = useContext(ThemeContext);
   const [failed, setFailed] = useState(false);
   const onDrop = useCallback(async ([acceptedFile]) => {
     if (!acceptedFile) return;
@@ -77,15 +75,7 @@ export default function FileUploader({
       maxSize: 30_000_000,
     });
 
-  if (acceptedFiles.length !== 0 && !failed)
-    return (
-      <Loader
-        type="ThreeDots"
-        color={theme.accentColor}
-        height={100}
-        width={100}
-      />
-    );
+  if (acceptedFiles.length !== 0 && !failed) return <CustomLoader />;
 
   return (
     <>

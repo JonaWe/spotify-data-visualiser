@@ -1,33 +1,47 @@
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import NumberWithUnit from '../util/NumberWithUnit';
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.75em 5em;
-  @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
+import CustomLoader from './Util/CustomLoader';
+import { StatWrapper } from './Util/Util.elements';
 
 export default function UserStats({ dataProcessor }) {
-  const tracksPlayed = dataProcessor.getTotalTracksPlayed();
-  const tracksSkipped = dataProcessor.getTotalSkippedSongs();
+  const [tracksSkipped, setTracksSkipped] = useState(null);
+  const [tracksPlayed, setTracksPlayed] = useState(null);
+  const [totalPlaytime, setTotalPlaytime] = useState(null);
+  const [averagePlaytimePerDay, setAveragePlaytimePerDay] = useState(null);
+  const [averageSongPlaytime, setAverageSongPlaytime] = useState(null);
+
+  useEffect(() => {
+    setTracksSkipped(dataProcessor.getTotalSkippedSongs());
+    setTracksPlayed(dataProcessor.getTotalTracksPlayed());
+    setTotalPlaytime(dataProcessor.getTotalPlaytime());
+    setAveragePlaytimePerDay(dataProcessor.getAveragePlaytimePerDay());
+    setAverageSongPlaytime(dataProcessor.getAverageSongPlaytime());
+  }, []);
+
+  if (
+    !tracksSkipped ||
+    !tracksPlayed ||
+    !totalPlaytime ||
+    !averagePlaytimePerDay ||
+    !averageSongPlaytime
+  ) {
+    return <CustomLoader />;
+  }
   return (
-    <Wrapper>
+    <StatWrapper>
       <NumberWithUnit
         label="Listening Time"
-        value={dataProcessor.getTotalPlaytime()}
+        value={totalPlaytime}
         unit="days"
       />
       <NumberWithUnit
         label="Listening Time per Day"
-        value={dataProcessor.getAveragePlaytimePerDay()}
+        value={averagePlaytimePerDay}
         unit="hours"
       />
       <NumberWithUnit
         label="Average Song Playtime"
-        value={dataProcessor.getAverageSongPlaytime()}
+        value={averageSongPlaytime}
         unit="minutes"
       />
       <NumberWithUnit label="Tracks Played" value={tracksPlayed} />
@@ -37,6 +51,6 @@ export default function UserStats({ dataProcessor }) {
         value={tracksSkipped / tracksPlayed}
         unit="ratio"
       />
-    </Wrapper>
+    </StatWrapper>
   );
 }
