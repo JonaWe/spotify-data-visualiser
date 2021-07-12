@@ -61,9 +61,11 @@ export default function ActivityPastYear({ dataProcessor }) {
 
   const allTracks = dataProcessor
     .getAllTrackNames()
+    .slice(0, 100)
     .map((name) => ({ value: name, label: name }));
   const allArtists = dataProcessor
     .getAllArtistNames()
+    .slice(0, 100)
     .map((name) => ({ value: name, label: name }));
 
   let data = dataProcessor.getPlaytimeOverYear(
@@ -123,7 +125,6 @@ export default function ActivityPastYear({ dataProcessor }) {
       <SelectWrapper>
         <Select
           isMulti
-          name="artists"
           options={allArtists}
           onChange={(newFilter) => {
             setArtistFilter(newFilter.map(({ value }) => value));
@@ -135,7 +136,6 @@ export default function ActivityPastYear({ dataProcessor }) {
         />
         <Select
           isMulti
-          name="tracks"
           options={allTracks}
           onChange={(newFilter) => {
             setTrackFilter(newFilter.map(({ value }) => value));
