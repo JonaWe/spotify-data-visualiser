@@ -20,6 +20,7 @@ export default function FileUploader({
 }) {
   const [failed, setFailed] = useState(false);
   const onDrop = useCallback(async ([acceptedFile]) => {
+    window.scrollTo(0, 0);
     if (!acceptedFile) return;
 
     setFailed(false);

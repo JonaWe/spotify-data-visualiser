@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
 import DataViews from '../dataViews';
 import {
@@ -9,6 +10,9 @@ import {
 } from '../util';
 
 export default function Datapage({ streamingHistory, userIdentity, userData }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <MainWrapper>
       <CenterdGridWrapper>
