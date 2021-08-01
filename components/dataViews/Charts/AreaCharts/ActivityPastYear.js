@@ -8,6 +8,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  Brush,
 } from 'recharts';
 import { ThemeContext } from 'styled-components';
 import CustomLoader from '../../Util/CustomLoader';
@@ -106,6 +107,7 @@ export default function ActivityPastYear({ dataProcessor }) {
             stroke={theme.bgMDark}
             dataKey="date"
             tickFormatter={(date) => format(date, 'MMM yy')}
+            scale="time"
           />
           <YAxis tick={{ fill: theme.fcLight }} stroke={theme.bgMDark} />
           <Tooltip
@@ -124,6 +126,12 @@ export default function ActivityPastYear({ dataProcessor }) {
               <stop offset="100%" stopColor={theme.bgPrimary} stopOpacity={0} />
             </linearGradient>
           </defs>
+          <Brush
+            stroke={theme.accentColor}
+            fill={theme.bgPrimary}
+            tickFormatter={(value) => `${value}${accuracy[0]}`}
+            travellerWidth={7}
+          />
           <Area
             type="monotone"
             dataKey="hoursPlayed"
