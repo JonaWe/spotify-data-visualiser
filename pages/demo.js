@@ -1,4 +1,5 @@
 import Datapage from '../components/pageContents/Datapage';
+import { getDemoData } from '../lib/getDemoData';
 
 export default function Home({ streamingHistory, userIdentity, userData }) {
   return (
@@ -11,17 +12,10 @@ export default function Home({ streamingHistory, userIdentity, userData }) {
 }
 
 export async function getStaticProps() {
-  // TODO add real demo data
+  const demoData = getDemoData();
   return {
     props: {
-      streamingHistory: [
-        {
-          endTime: '2021-07-10 22:29',
-          artistName: 'Artist',
-          trackName: 'Track',
-          msPlayed: 180_000,
-        },
-      ],
+      streamingHistory: demoData,
       userIdentity: null,
       userData: { username: 'Username' },
     },
