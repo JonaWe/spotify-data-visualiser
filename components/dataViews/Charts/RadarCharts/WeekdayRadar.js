@@ -43,6 +43,7 @@ export default function WeekdayRadar({
   dataProcessor,
   angleOffset = (360 / 7) * 1,
 }) {
+  const theme = useContext(ThemeContext);
   const [data, setData] = useState(null);
   const [totalDays, setTotalDays] = useState(null);
 
@@ -55,7 +56,6 @@ export default function WeekdayRadar({
     return <CustomLoader />;
   }
 
-  const theme = useContext(ThemeContext);
   return (
     <ChartAndTitleWrapper>
       <h2>Listening Activity related to Weekday</h2>
