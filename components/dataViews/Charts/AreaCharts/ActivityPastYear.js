@@ -107,7 +107,6 @@ export default function ActivityPastYear({ dataProcessor }) {
             stroke={theme.bgMDark}
             dataKey="date"
             tickFormatter={(date) => format(date, 'MMM yy')}
-            scale="time"
           />
           <YAxis tick={{ fill: theme.fcLight }} stroke={theme.bgMDark} />
           <Tooltip
