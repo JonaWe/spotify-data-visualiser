@@ -1,10 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
 const Link = styled.a`
+  font-size: 2.5em;
   transition: all 0.15s ease-in-out;
   color: ${({ theme }) => theme.fcPrimary};
-  width: 2.5em;
   &:hover {
     transition: all 0.15s ease-in-out;
     color: ${({ theme }) => theme.accentColor};
@@ -12,10 +11,10 @@ const Link = styled.a`
   }
 `;
 
-export default function SocialLink({ href, icon }) {
+export default function SocialLink({ href, children }) {
   return (
     <Link href={href} target="_blank">
-      <FontAwesomeIcon icon={icon} />
+      {children}
     </Link>
   );
 }

@@ -8,9 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-brands-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "d3-format": "^2.0.0",
     "date-fns": "^2.22.1",
     "jszip": "^3.6.0",

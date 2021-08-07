@@ -1,4 +1,4 @@
-import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FaGithub, FaTwitter } from 'react-icons/fa';
 import styled from 'styled-components';
 import SocialLink from './SocialLink';
 
@@ -74,11 +74,12 @@ export default function Footer() {
     <FooterBox>
       <SocialArea>
         <IconBox>
-          <SocialLink href="https://github.com/JonaWe" icon={faGithub} />
-          <SocialLink
-            href="https://twitter.com/JonaWessendorf"
-            icon={faTwitter}
-          />
+          <SocialLink href="https://github.com/JonaWe">
+            <FaGithub />
+          </SocialLink>
+          <SocialLink href="https://twitter.com/JonaWessendorf">
+            <FaTwitter />
+          </SocialLink>
         </IconBox>
       </SocialArea>
       <DescriptionArea>
