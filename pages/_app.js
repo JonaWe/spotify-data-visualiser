@@ -12,6 +12,7 @@ export default function MyApp({ Component, pageProps }) {
           href="https://fonts.googleapis.com/css?family=Roboto"
           rel="stylesheet"
         />
+        <link rel="shortcut icon" href="/logo.svg" />
       </Head>
       <Component {...pageProps} />
       <Footer />
