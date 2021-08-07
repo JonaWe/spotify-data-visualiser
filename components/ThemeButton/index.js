@@ -8,7 +8,7 @@ export const ThemeButton = styled.span`
   background-color: ${(props) => props.theme.fcLight};
   border-radius: 100vh;
   box-shadow: 5px 5px 15px
-    ${(props) => (props.theme.isDarkTheme ? '7px' : '-1px')} rgba(0, 0, 0, 0.5);
+    ${(props) => (props.theme.isDarkTheme ? '3px' : '-1px')} rgba(0, 0, 0, 0.5);
 
   position: fixed;
   bottom: 0;

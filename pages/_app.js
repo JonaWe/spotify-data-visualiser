@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 import Footer from '../components/Footer';
 import { lightTheme, darkTheme } from '../config/theme';
-import { ThemeButton, ThemeButtonWrapper } from '../components/ThemeButton';
+import { ThemeButton } from '../components/ThemeButton';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import '../styles/globals.css';
 
