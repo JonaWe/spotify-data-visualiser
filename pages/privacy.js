@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Head from 'next/head';
 import styled from 'styled-components';
 import {
   Button,
@@ -29,6 +30,9 @@ const TextWrapper = styled.div`
 export default function Home() {
   return (
     <MainWrapper>
+      <Head>
+        <title>Visualisify - Privacy</title>
+      </Head>
       <CenterdGridWrapper>
         <Title>Privacy</Title>
         <TextWrapper>
