@@ -1,7 +1,10 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 import Footer from '../components/Footer';
-import theme from '../config/theme';
+import { lightTheme, darkTheme } from '../config/theme';
+import { ThemeButton, ThemeButtonWrapper } from '../components/ThemeButton';
+import { FaSun, FaMoon } from 'react-icons/fa';
 import '../styles/globals.css';
 
 const META_DATA = {
@@ -14,6 +17,18 @@ const META_DATA = {
 };
 
 export default function MyApp({ Component, pageProps }) {
+  const [theme, setTheme] = useState(darkTheme);
+  const [darkMode, setDarkMode] = useState(true);
+  const [buttonIcon, setButtonIcon] = useState(FaSun);
+
+  useEffect(() => {
+    setTheme(darkMode ? darkTheme : lightTheme);
+    setButtonIcon(darkMode ? FaSun : FaMoon);
+  }, [darkMode]);
+
+  function toggleTheme() {
+    setDarkMode((current) => !current);
+  }
   return (
     <ThemeProvider theme={theme}>
       <Head>
@@ -50,6 +65,7 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <Component {...pageProps} />
       <Footer />
+      <ThemeButton onClick={() => toggleTheme()}>{buttonIcon}</ThemeButton>
     </ThemeProvider>
   );
 }
