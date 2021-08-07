@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Head from 'next/head';
 import Datapage from '../components/pageContents/Datapage';
 import FileUploader from '../components/pageContents/FileUploader';
 import { CenterdGridWrapper, MainWrapper } from '../components/util';
@@ -11,6 +12,11 @@ export default function Home() {
 
   return (
     <MainWrapper>
+      <Head>
+        <title>{`Visualisify - ${
+          processingFinished ? 'My Stats' : 'Upload Data'
+        }`}</title>
+      </Head>
       <CenterdGridWrapper>
         {!processingFinished ? (
           <FileUploader

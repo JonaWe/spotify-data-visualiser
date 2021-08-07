@@ -1,13 +1,19 @@
+import Head from 'next/head';
 import Datapage from '../components/pageContents/Datapage';
 import { getDemoData } from '../lib/getDemoData';
 
 export default function Home({ streamingHistory, userIdentity, userData }) {
   return (
-    <Datapage
-      streamingHistory={streamingHistory}
-      userIdentity={userIdentity}
-      userData={userData}
-    />
+    <>
+      <Head>
+        <title>Visualisify - Demo</title>
+      </Head>
+      <Datapage
+        streamingHistory={streamingHistory}
+        userIdentity={userIdentity}
+        userData={userData}
+      />
+    </>
   );
 }
 
