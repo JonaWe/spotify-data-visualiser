@@ -44,7 +44,7 @@ export default function MyApp({ Component, pageProps }) {
 
         {/* Additional meta tags */}
         <meta name="robots" content="index, follow" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="language" content="English" />
         <meta name="author" content={META_DATA.author} />
       </Head>
