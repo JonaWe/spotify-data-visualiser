@@ -52,9 +52,11 @@ export default function Home() {
             </Link>
           </Card>
         </CardWrapper>
-        <Link href="/demo">
-          <Button primary>View Demodata</Button>
-        </Link>
+        <div style={{ marginTop: '5em' }}>
+          <Link href="/demo">
+            <Button primary>View Demodata</Button>
+          </Link>
+        </div>
       </CenterdGridWrapper>
     </MainWrapper>
   );
