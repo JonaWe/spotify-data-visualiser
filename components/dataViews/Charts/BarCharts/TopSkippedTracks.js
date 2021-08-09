@@ -12,7 +12,7 @@ import PlaytimeByCategory from './PlaytimeByCategory';
 
 const options = [10, 25, 50, 100].map((value) => ({ label: value, value }));
 
-export default function TopTracks({ dataProcessor }) {
+export default function TopSkippedTracks({ dataProcessor }) {
   const [maxTracks, setMaxTracks] = useState(10);
 
   const theme = useContext(ThemeContext);
@@ -22,17 +22,17 @@ export default function TopTracks({ dataProcessor }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    setData(dataProcessor.getTopTracks(maxTracks));
+    setData(dataProcessor.getMostSkippedSongs(maxTracks));
   }, [maxTracks]);
 
   if (!data) return <CustomLoader />;
   return (
     <ChartAndTitleWrapper>
-      <h2>Top {maxTracks} Tracks by Playtime</h2>
+      <h2>Top {maxTracks} Most Skipped Tracks</h2>
       <PlaytimeByCategory
         data={data}
         category="trackName"
-        dataKey="hoursPlayed"
+        dataKey="timesSkipped"
       />
       <SelectWrapper>
         <Select

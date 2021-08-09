@@ -29,7 +29,11 @@ export default function TopArtists({ dataProcessor }) {
   return (
     <ChartAndTitleWrapper>
       <h2>Top {maxArtists} Artists by Playtime</h2>
-      <PlaytimeByCategory data={data} category="artistName" />
+      <PlaytimeByCategory
+        data={data}
+        category="artistName"
+        dataKey="hoursPlayed"
+      />
       <SelectWrapper>
         <Select
           options={options}

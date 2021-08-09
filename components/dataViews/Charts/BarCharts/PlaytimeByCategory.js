@@ -15,9 +15,18 @@ import {
   timeAmountConverter,
 } from '../../Util/Util.elements';
 
-const PlayTimeByCategoryTT = ({ active, payload, label, category }) => {
+const PlayTimeByCategoryTT = ({
+  active,
+  payload,
+  label,
+  category,
+  dataKey,
+}) => {
   if (active && payload && payload.length) {
-    const totalPlaytime = timeAmountConverter(payload[0].value);
+    let value = payload[0].value;
+    if (dataKey === 'hoursPlayed') value = timeAmountConverter(value);
+    const valueDescription =
+      dataKey === 'hoursPlayed' ? 'Total playtime: ' : 'Total times skipped: ';
     return (
       <CustomToolTipWrapper>
         <h3>{label}</h3>
@@ -27,14 +36,15 @@ const PlayTimeByCategoryTT = ({ active, payload, label, category }) => {
           </p>
         )}
         <p>
-          Total playtime: <b>{totalPlaytime}</b>
+          {valueDescription}
+          <b>{value}</b>
         </p>
       </CustomToolTipWrapper>
     );
   } else return null;
 };
 
-export default function PlaytimeByCategory({ data, category }) {
+export default function PlaytimeByCategory({ data, category, dataKey }) {
   const theme = useContext(ThemeContext);
   return (
     <ChartWrapper>
@@ -60,7 +70,9 @@ export default function PlaytimeByCategory({ data, category }) {
           isAnimationActive={true}
           animationEasing="ease-out"
           animationDuration={200}
-          content={<PlayTimeByCategoryTT category={category} />}
+          content={
+            <PlayTimeByCategoryTT category={category} dataKey={dataKey} />
+          }
         />
         <Legend
           formatter={(value) => (
@@ -83,7 +95,7 @@ export default function PlaytimeByCategory({ data, category }) {
         </defs>
         <Bar
           name="Hours spent listening"
-          dataKey="hoursPlayed"
+          dataKey={dataKey}
           fill="url(#linGradient2)"
           radius={[5, 5, 0, 0]}
         />

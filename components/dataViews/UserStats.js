@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import NumberWithUnit from '../util/NumberWithUnit';
 import CustomLoader from './Util/CustomLoader';
-import { StatWrapper } from './Util/Util.elements';
+import { ChartAndTitleWrapper, StatWrapper } from './Util/Util.elements';
 
 export default function UserStats({ dataProcessor }) {
   const [tracksSkipped, setTracksSkipped] = useState(null);
@@ -28,29 +28,32 @@ export default function UserStats({ dataProcessor }) {
     return <CustomLoader />;
   }
   return (
-    <StatWrapper>
-      <NumberWithUnit
-        label="Listening Time"
-        value={totalPlaytime}
-        unit="days"
-      />
-      <NumberWithUnit
-        label="Listening Time per Day"
-        value={averagePlaytimePerDay}
-        unit="hours"
-      />
-      <NumberWithUnit
-        label="Average Song Playtime"
-        value={averageSongPlaytime}
-        unit="minutes"
-      />
-      <NumberWithUnit label="Tracks Played" value={tracksPlayed} />
-      <NumberWithUnit label="Tracks Skipped" value={tracksSkipped} />
-      <NumberWithUnit
-        label="Tracks Skipped"
-        value={tracksSkipped / tracksPlayed}
-        unit="ratio"
-      />
-    </StatWrapper>
+    <ChartAndTitleWrapper>
+      <h2>Overall Stats</h2>
+      <StatWrapper>
+        <NumberWithUnit
+          label="Listening Time"
+          value={totalPlaytime}
+          unit="days"
+        />
+        <NumberWithUnit
+          label="Listening Time per Day"
+          value={averagePlaytimePerDay}
+          unit="hours"
+        />
+        <NumberWithUnit
+          label="Average Song Playtime"
+          value={averageSongPlaytime}
+          unit="minutes"
+        />
+        <NumberWithUnit label="Tracks Played" value={tracksPlayed} />
+        <NumberWithUnit label="Tracks Skipped" value={tracksSkipped} />
+        <NumberWithUnit
+          label="Tracks Skipped"
+          value={tracksSkipped / tracksPlayed}
+          unit="ratio"
+        />
+      </StatWrapper>
+    </ChartAndTitleWrapper>
   );
 }

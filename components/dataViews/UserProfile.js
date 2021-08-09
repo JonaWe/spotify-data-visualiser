@@ -6,7 +6,7 @@ const ImageWrapper = styled.div`
   gap: 2em;
   align-items: center;
   text-align: center;
-  margin: 4em 0;
+  margin: 4em 0 2.5em 0;
   @media screen and (max-width: 768px) {
     grid-auto-flow: row;
   }
@@ -22,8 +22,8 @@ const UserName = styled.p`
 const UserImage = styled.img`
   border-radius: 50%;
   object-fit: cover;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 `;
 
 export default function UserProfile({ userImageUrl, userDisplayName }) {

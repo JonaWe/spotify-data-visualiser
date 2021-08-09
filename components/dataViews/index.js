@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import DataProcessor from '../../lib/DataProcessor';
 import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
 import TopArtists from './Charts/BarCharts/TopArtists';
+import TopSkippedTracks from './Charts/BarCharts/TopSkippedTracks';
 import TopTracks from './Charts/BarCharts/TopTracks';
 import DaytimeRadar from './Charts/RadarCharts/DaytimeRadar';
 import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
@@ -14,7 +15,7 @@ const ChartsWrapper = styled.div`
   align-items: center;
   justify-items: center;
   row-gap: 4em;
-  margin-top: 4em;
+  margin: 4em 0;
 `;
 
 export default function dataViews({
@@ -49,6 +50,7 @@ export default function dataViews({
         <TopTracks dataProcessor={dataProcessor} />
         <DaytimeRadar dataProcessor={dataProcessor} />
         <WeekdayRadar dataProcessor={dataProcessor} />
+        <TopSkippedTracks dataProcessor={dataProcessor} />
       </ChartsWrapper>
     </>
   );
