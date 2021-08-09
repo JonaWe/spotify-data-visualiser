@@ -4,10 +4,10 @@ export const lightTheme = {
   fcULight: '#404040',
   accentColor: '#1CB955',
   dangerColor: '#fc1639',
-  bgMDark: '#acacac',
+  bgMDark: '#959595',
   bgDark: '#ffffff',
-  bgPrimary: '#f0f0f0', // #121212
-  bgSecondary: '#e5e5e5', // #181919
+  bgPrimary: '#DEDEDE', // #121212
+  bgSecondary: '#F0F0F0', // #181919
   isDarkTheme: false,
 };
 
