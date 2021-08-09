@@ -89,7 +89,7 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
 
   useEffect(() => {
     setTotalDays(dataProcessor.getTotalDays());
-  }, []);
+  }, [dataProcessor]);
 
   useEffect(() => {
     setData(dataProcessor.getTimeslots(weekdayFilter));

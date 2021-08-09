@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import DataProcessor from '../../lib/DataProcessor';
 import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
+import SongPlaytime from './Charts/AreaCharts/SongPlaytime';
 import TopArtists from './Charts/BarCharts/TopArtists';
 import TopSkippedTracks from './Charts/BarCharts/TopSkippedTracks';
 import TopTracks from './Charts/BarCharts/TopTracks';
@@ -50,6 +51,7 @@ export default function dataViews({
         <TopTracks dataProcessor={dataProcessor} />
         <DaytimeRadar dataProcessor={dataProcessor} />
         <WeekdayRadar dataProcessor={dataProcessor} />
+        <SongPlaytime dataProcessor={dataProcessor} />
         <TopSkippedTracks dataProcessor={dataProcessor} />
       </ChartsWrapper>
     </>

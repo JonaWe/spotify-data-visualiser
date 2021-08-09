@@ -22,28 +22,20 @@ import {
   timeAmountConverter,
 } from '../../Util/Util.elements';
 
-const PastYearActivityTT = ({ active, payload, label, accuracy }) => {
-  if (active && payload && payload.length && label) {
-    const listeningTime = timeAmountConverter(payload[0].value);
-    let displayTime;
-    switch (accuracy) {
-      case 'days':
-        displayTime = format(label, 'd. MMMM yyyy');
-        break;
-
-      case 'weeks':
-        displayTime = format(label, "Io 'week of' yyyy");
-        break;
-
-      case 'months':
-        displayTime = format(label, 'MMMM, yyyy');
-        break;
-    }
+const SongPlaytimeTT = ({ active, payload, label: seconds }) => {
+  if (active && payload && payload.length && seconds !== undefined) {
+    const amount = (payload[0].value * 100).toFixed(2);
+    const displayTime =
+      seconds < 60
+        ? `${seconds} seconds`
+        : seconds % 60 === 0
+        ? `${Math.floor(seconds / 60)} minutes`
+        : `${Math.floor(seconds / 60)} minutes ${seconds % 60} seconds`;
     return (
       <CustomToolTipWrapper>
         <h3>{displayTime}</h3>
         <p>
-          Listening time: <b>{listeningTime}</b>
+          Playing: <b>{amount}%</b>
         </p>
       </CustomToolTipWrapper>
     );
@@ -54,21 +46,18 @@ const accuracyOptions = ['Days', 'Weeks', 'Months'].map((value) => ({
   value: value.toLowerCase(),
 }));
 
-export default function ActivityPastYear({ dataProcessor }) {
+export default function SongPlaytime({ dataProcessor }) {
   const theme = useContext(ThemeContext);
 
   const [artistFilter, setArtistFilter] = useState([]);
   const [trackFilter, setTrackFilter] = useState([]);
-  const [accuracy, setAccuracy] = useState('weeks');
   const [data, setData] = useState(null);
   const [allTracks, setAllTracks] = useState(null);
   const [allArtists, setAllArtists] = useState(null);
 
   useEffect(() => {
-    setData(
-      dataProcessor.getPlaytimeOverYear(artistFilter, trackFilter, accuracy)
-    );
-  }, [artistFilter, trackFilter, accuracy]);
+    setData(dataProcessor.getSongPlaytime(artistFilter, trackFilter));
+  }, [artistFilter, trackFilter]);
 
   useEffect(() => {
     setAllTracks(
@@ -94,7 +83,7 @@ export default function ActivityPastYear({ dataProcessor }) {
 
   return (
     <ChartAndTitleWrapper>
-      <h2>Activity past year</h2>
+      <h2>Song Playtime</h2>
       <ChartWrapper>
         <AreaChart data={data} margin={{ left: 0, right: 30 }}>
           <CartesianGrid
@@ -105,15 +94,20 @@ export default function ActivityPastYear({ dataProcessor }) {
           <XAxis
             tick={{ fill: theme.fcLight }}
             stroke={theme.bgMDark}
-            dataKey="date"
-            tickFormatter={(date) => format(date, 'MMM yy')}
+            dataKey="secondsPlayed"
+            type="number"
+            scale="time"
           />
-          <YAxis tick={{ fill: theme.fcLight }} stroke={theme.bgMDark} />
+          <YAxis
+            tick={{ fill: theme.fcLight }}
+            stroke={theme.bgMDark}
+            tickFormatter={(percentage) => `${percentage * 100}%`}
+          />
           <Tooltip
             isAnimationActive={true}
             animationEasing="ease-out"
             animationDuration={200}
-            content={<PastYearActivityTT accuracy={accuracy} />}
+            content={<SongPlaytimeTT />}
           />
           <defs>
             <linearGradient id="linGradient" x1="0" y1="0" x2="0" y2="1">
@@ -125,18 +119,11 @@ export default function ActivityPastYear({ dataProcessor }) {
               <stop offset="100%" stopColor={theme.bgPrimary} stopOpacity={0} />
             </linearGradient>
           </defs>
-          <Brush
-            stroke={theme.accentColor}
-            fill={theme.bgPrimary}
-            tickFormatter={(value) => `${value}${accuracy[0]}`}
-            travellerWidth={7}
-          />
           <Area
             type="monotone"
-            dataKey="hoursPlayed"
+            dataKey="percentage"
             stroke={theme.accentColor}
             strokeWidth={2}
-            // type="step"
             fill={'url(#linGradient)'}
             fillOpacity={1}
           />
@@ -164,16 +151,6 @@ export default function ActivityPastYear({ dataProcessor }) {
           noOptionsMessage={({ inputValue }) => `No result for '${inputValue}'`}
           styles={selectStyles}
           theme={selectTheme}
-        />
-        <Select
-          options={accuracyOptions}
-          defaultValue={accuracyOptions[1]}
-          isSearchable={false}
-          styles={selectStyles}
-          theme={selectTheme}
-          onChange={({ value }) => {
-            setAccuracy(value);
-          }}
         />
       </SelectWrapper>
     </ChartAndTitleWrapper>

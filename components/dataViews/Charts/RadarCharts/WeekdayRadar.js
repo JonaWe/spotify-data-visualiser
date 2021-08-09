@@ -50,7 +50,7 @@ export default function WeekdayRadar({
   useEffect(() => {
     setData(dataProcessor.getWeekdays());
     setTotalDays(dataProcessor.getTotalDays());
-  }, []);
+  }, [dataProcessor]);
 
   if (!data) {
     return <CustomLoader />;
