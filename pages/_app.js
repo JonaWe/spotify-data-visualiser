@@ -6,6 +6,7 @@ import { lightTheme, darkTheme } from '../config/theme';
 import { ThemeButton } from '../components/ThemeButton';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import '../styles/globals.css';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const META_DATA = {
   title: 'Visualisify - Spotify User Data Visualizer',
@@ -18,7 +19,7 @@ const META_DATA = {
 
 export default function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState(darkTheme);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useLocalStorage('darkModeActive', true);
   const [buttonIcon, setButtonIcon] = useState(FaSun);
 
   useEffect(() => {
