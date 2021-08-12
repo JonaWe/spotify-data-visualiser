@@ -5,17 +5,16 @@ const KEY_PREFIX = 'VISUALISIFY-';
 export default function useLocalStorage(key, initialValue) {
   const prefixedKey = KEY_PREFIX + key;
 
-  const [value, setValue] = useState(() => {
-    if (typeof window === 'undefined') return;
-    const jsonValue = localStorage.getItem(prefixedKey);
-    if (jsonValue != null) return JSON.parse(jsonValue);
+  const [value, setValue] = useState(initialValue);
 
-    if (typeof initialValue === 'function') return initialValue();
-    else return initialValue;
-  });
-
+  // loads the saved value from localStorage on the initial load
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    const stringValue = localStorage.getItem(prefixedKey);
+    setValue(stringValue == null ? initialValue : JSON.parse(stringValue));
+  }, []);
+
+  // whenever the state is switched the localStorage gets updated
+  useEffect(() => {
     localStorage.setItem(prefixedKey, JSON.stringify(value));
   }, [prefixedKey, value]);
 
