@@ -3,7 +3,7 @@ import NumberWithUnit from '../util/NumberWithUnit';
 import CustomLoader from './Util/CustomLoader';
 import { ChartAndTitleWrapper, StatWrapper } from './Util/Util.elements';
 
-export default function UserStats({ dataProcessor }) {
+export default function UserStats({ dataProcessor, innerRef }) {
   const [tracksSkipped, setTracksSkipped] = useState(null);
   const [tracksPlayed, setTracksPlayed] = useState(null);
   const [totalPlaytime, setTotalPlaytime] = useState(null);
@@ -28,7 +28,7 @@ export default function UserStats({ dataProcessor }) {
     return <CustomLoader />;
   }
   return (
-    <ChartAndTitleWrapper>
+    <ChartAndTitleWrapper ref={innerRef} id="overview">
       <h2>Overall Stats</h2>
       <StatWrapper>
         <NumberWithUnit

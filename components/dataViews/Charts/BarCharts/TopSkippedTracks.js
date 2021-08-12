@@ -12,7 +12,7 @@ import PlaytimeByCategory from './PlaytimeByCategory';
 
 const options = [10, 25, 50, 100].map((value) => ({ label: value, value }));
 
-export default function TopSkippedTracks({ dataProcessor }) {
+export default function TopSkippedTracks({ dataProcessor, innerRef }) {
   const [maxTracks, setMaxTracks] = useState(10);
 
   const theme = useContext(ThemeContext);
@@ -27,7 +27,7 @@ export default function TopSkippedTracks({ dataProcessor }) {
 
   if (!data) return <CustomLoader />;
   return (
-    <ChartAndTitleWrapper>
+    <ChartAndTitleWrapper ref={innerRef} id="topSkippedTracks">
       <h2>Top {maxTracks} Most Skipped Tracks</h2>
       <PlaytimeByCategory
         data={data}

@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { useContext, useState, useEffect } from 'react';
 import Select from 'react-select';
 import {
@@ -8,7 +7,6 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-  Brush,
 } from 'recharts';
 import { ThemeContext } from 'styled-components';
 import CustomLoader from '../../Util/CustomLoader';
@@ -19,7 +17,6 @@ import {
   getSelectStyles,
   getSelectTheme,
   SelectWrapper,
-  timeAmountConverter,
 } from '../../Util/Util.elements';
 
 const SongPlaytimeTT = ({ active, payload, label: seconds }) => {
@@ -46,7 +43,7 @@ const accuracyOptions = ['Days', 'Weeks', 'Months'].map((value) => ({
   value: value.toLowerCase(),
 }));
 
-export default function SongPlaytime({ dataProcessor }) {
+export default function SongPlaytime({ dataProcessor, innerRef }) {
   const theme = useContext(ThemeContext);
 
   const [artistFilter, setArtistFilter] = useState([]);
@@ -82,7 +79,7 @@ export default function SongPlaytime({ dataProcessor }) {
   const selectStyles = getSelectStyles(theme);
 
   return (
-    <ChartAndTitleWrapper>
+    <ChartAndTitleWrapper ref={innerRef} id="songPlaytime">
       <h2>Song Playtime</h2>
       <ChartWrapper>
         <AreaChart data={data} margin={{ left: 0, right: 30 }}>

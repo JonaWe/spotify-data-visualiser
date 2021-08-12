@@ -81,7 +81,11 @@ const options = [
   },
 ];
 
-export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
+export default function DaytimeRadar({
+  dataProcessor,
+  angleOffset = 90,
+  innerRef,
+}) {
   const theme = useContext(ThemeContext);
   const [weekdayFilter, setWeekdayFilter] = useState([]);
   const [data, setData] = useState(null);
@@ -103,7 +107,7 @@ export default function DaytimeRadar({ dataProcessor, angleOffset = 90 }) {
   const selectStyles = getSelectStyles(theme);
 
   return (
-    <ChartAndTitleWrapper>
+    <ChartAndTitleWrapper ref={innerRef} id="daytimeRadar">
       <h2>Listening Activity related to Daytime</h2>
       <ChartWrapper>
         <RadarChart

@@ -12,7 +12,7 @@ import PlaytimeByCategory from './PlaytimeByCategory';
 
 const options = [10, 25, 50, 100].map((value) => ({ label: value, value }));
 
-export default function TopTracks({ dataProcessor }) {
+export default function TopTracks({ dataProcessor, innerRef }) {
   const [maxTracks, setMaxTracks] = useState(10);
 
   const theme = useContext(ThemeContext);
@@ -27,7 +27,7 @@ export default function TopTracks({ dataProcessor }) {
 
   if (!data) return <CustomLoader />;
   return (
-    <ChartAndTitleWrapper>
+    <ChartAndTitleWrapper ref={innerRef} id="topTracks">
       <h2>Top {maxTracks} Tracks by Playtime</h2>
       <PlaytimeByCategory
         data={data}

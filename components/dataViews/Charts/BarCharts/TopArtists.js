@@ -12,7 +12,7 @@ import PlaytimeByCategory from './PlaytimeByCategory';
 
 const options = [10, 25, 50, 100].map((value) => ({ label: value, value }));
 
-export default function TopArtists({ dataProcessor }) {
+export default function TopArtists({ dataProcessor, innerRef }) {
   const [maxArtists, setMaxArtists] = useState(10);
   const [data, setData] = useState(null);
 
@@ -27,7 +27,7 @@ export default function TopArtists({ dataProcessor }) {
   if (!data) return <CustomLoader />;
 
   return (
-    <ChartAndTitleWrapper>
+    <ChartAndTitleWrapper ref={innerRef} id="topArtists">
       <h2>Top {maxArtists} Artists by Playtime</h2>
       <PlaytimeByCategory
         data={data}

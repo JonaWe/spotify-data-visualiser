@@ -54,7 +54,7 @@ const accuracyOptions = ['Days', 'Weeks', 'Months'].map((value) => ({
   value: value.toLowerCase(),
 }));
 
-export default function ActivityPastYear({ dataProcessor }) {
+export default function ActivityPastYear({ dataProcessor, innerRef }) {
   const theme = useContext(ThemeContext);
 
   const [artistFilter, setArtistFilter] = useState([]);
@@ -93,7 +93,7 @@ export default function ActivityPastYear({ dataProcessor }) {
   const selectStyles = getSelectStyles(theme);
 
   return (
-    <ChartAndTitleWrapper>
+    <ChartAndTitleWrapper ref={innerRef} id="activityPastYear">
       <h2>Activity past year</h2>
       <ChartWrapper>
         <AreaChart data={data} margin={{ left: 0, right: 30 }}>
