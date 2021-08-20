@@ -47,7 +47,7 @@ export default function dataViews({
       ? userIdentity.displayName
       : userData.username;
 
-  const [currentPos, setCurrentPos] = useState('none');
+  const [currentPos, setCurrentPos] = useState('overview');
 
   const bottomOffset = '50%';
   const topOffset = '49%';
