@@ -11,7 +11,6 @@ import WeekdayRadar from './Charts/RadarCharts/WeekdayRadar';
 import UserProfile from './UserProfile';
 import UserStats from './UserStats';
 import { Waypoint } from 'react-waypoint';
-import SideNavbar from '../SideNavbar';
 
 const ChartsWrapper = styled.div`
   display: grid;
@@ -63,11 +62,6 @@ export default function dataViews({
         {format(new Date(userData.creationTime), 'do MMMM yyyy')}
       </h2> */}
       <ChartsWrapper>
-        <SideNavbar
-          activeElement={currentPos}
-          updateActiveElement={setCurrentPos}
-        />
-
         <Waypoint
           onEnter={() => setCurrentPos('overview')}
           // onLeave={() => setCurrentPos('none')}
