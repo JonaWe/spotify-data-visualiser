@@ -99,6 +99,7 @@ export default function SongPlaytime({ dataProcessor, innerRef }) {
             tick={{ fill: theme.fcLight }}
             stroke={theme.bgMDark}
             tickFormatter={(percentage) => `${percentage * 100}%`}
+            domain={[0, 1]}
           />
           <Tooltip
             isAnimationActive={true}
