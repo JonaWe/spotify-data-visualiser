@@ -12,9 +12,9 @@ const META_DATA = {
   title: 'Visualisify - Spotify User Data Visualizer',
   description:
     'Analyse your Spotify data and get an interesting insight in your listening activity. Find out what time of day you like to listen the most and more.',
-  URL: 'https://spotify-data-visualiser.vercel.app/',
+  URL: 'https://www.visualisify.live/',
   author: 'Jona Wessendorf',
-  image_URL: 'https://spotify-data-visualiser.vercel.app/images/preview.png',
+  image_URL: 'https://www.visualisify.live/images/preview.png',
 };
 
 export default function MyApp({ Component, pageProps }) {
