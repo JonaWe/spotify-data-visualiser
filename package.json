@@ -8,20 +8,20 @@
     "start": "next start"
   },
   "dependencies": {
-    "d3-format": "^2.0.0",
-    "date-fns": "^2.23.0",
+    "d3-format": "^3.0.1",
+    "date-fns": "^2.25.0",
     "jszip": "^3.7.1",
     "mem": "^9.0.1",
     "next": "^12.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-dropzone": "^11.3.4",
-    "react-icons": "^4.2.0",
+    "react-dropzone": "^11.4.2",
+    "react-icons": "^4.3.1",
     "react-loader-spinner": "^4.0.0",
-    "react-select": "^4.3.1",
-    "recharts": "^2.1.2",
-    "styled-components": "^5.3.1",
-    "use-count-up": "^2.3.1"
+    "react-select": "^5.1.0",
+    "recharts": "^2.1.6",
+    "styled-components": "^5.3.3",
+    "use-count-up": "^3.0.1"
   },
   "description": "This project visualizes the user data you can download from Spotify.",
   "repository": {
@@ -34,6 +34,6 @@
   },
   "homepage": "https://github.com/JonaWe/spotify-data-visualiser#readme",
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.13.2"
+    "babel-plugin-styled-components": "^1.13.3"
   }
 }
