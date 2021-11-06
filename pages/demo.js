@@ -8,7 +8,7 @@ export default function Home({ streamingHistory, userIdentity, userData }) {
       <Head>
         <title>Visualisify - Demo</title>
       </Head>
-      <Datapage
+      <DataPage
         streamingHistory={streamingHistory}
         userIdentity={userIdentity}
         userData={userData}
