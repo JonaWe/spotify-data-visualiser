@@ -11,13 +11,13 @@ import {
   Brush,
 } from 'recharts';
 import { ThemeContext } from 'styled-components';
+import useSelectStyles from '../../../../hooks/useSelectStyles';
+import useSingleSelect from '../../../../hooks/useSingleSelect';
 import CustomLoader from '../../Util/CustomLoader';
 import {
   ChartAndTitleWrapper,
   ChartWrapper,
   CustomToolTipWrapper,
-  getSelectStyles,
-  getSelectTheme,
   SelectWrapper,
   timeAmountConverter,
 } from '../../Util/Util.elements';
@@ -49,17 +49,22 @@ const PastYearActivityTT = ({ active, payload, label, accuracy }) => {
     );
   } else return null;
 };
-const accuracyOptions = ['Days', 'Weeks', 'Months'].map((value) => ({
-  label: value,
-  value: value.toLowerCase(),
-}));
 
 export default function ActivityPastYear({ dataProcessor, innerRef }) {
   const theme = useContext(ThemeContext);
+  const { selectStyles, selectTheme } = useSelectStyles();
+
+  const [accuracy, AccuracySelect] = useSingleSelect(
+    'weeks',
+    ['days', 'weeks', 'months'],
+    {
+      theme: selectTheme,
+      styles: selectStyles,
+    }
+  );
 
   const [artistFilter, setArtistFilter] = useState([]);
   const [trackFilter, setTrackFilter] = useState([]);
-  const [accuracy, setAccuracy] = useState('weeks');
   const [data, setData] = useState(null);
   const [allTracks, setAllTracks] = useState(null);
   const [allArtists, setAllArtists] = useState(null);
@@ -88,9 +93,6 @@ export default function ActivityPastYear({ dataProcessor, innerRef }) {
   if (!data || !allArtists || !allTracks) {
     return <CustomLoader />;
   }
-
-  const selectTheme = getSelectTheme(theme);
-  const selectStyles = getSelectStyles(theme);
 
   return (
     <ChartAndTitleWrapper ref={innerRef} id="activityPastYear">
@@ -165,16 +167,7 @@ export default function ActivityPastYear({ dataProcessor, innerRef }) {
           styles={selectStyles}
           theme={selectTheme}
         />
-        <Select
-          options={accuracyOptions}
-          defaultValue={accuracyOptions[1]}
-          isSearchable={false}
-          styles={selectStyles}
-          theme={selectTheme}
-          onChange={({ value }) => {
-            setAccuracy(value);
-          }}
-        />
+        {AccuracySelect}
       </SelectWrapper>
     </ChartAndTitleWrapper>
   );
