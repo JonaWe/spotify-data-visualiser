@@ -8,8 +8,21 @@ import {
   MainWrapper,
   Title,
 } from '../util';
+import HistoryItem from '../../lib/Types/HistoryItem';
+import UserIdentity from '../../lib/Types/UserIdentity';
+import UserData from '../../lib/Types/UserData';
 
-export default function Datapage({ streamingHistory, userIdentity, userData }) {
+interface DataPageProps {
+  streamingHistory: HistoryItem[];
+  userIdentity?: UserIdentity;
+  userData: UserData;
+}
+
+export default function DataPage({
+  streamingHistory,
+  userIdentity,
+  userData,
+}: DataPageProps) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import Datapage from '../components/pageContents/Datapage';
+import DataPage from '../components/pageContents/DataPage';
 import FileUploader from '../components/pageContents/FileUploader';
 import { CenterdGridWrapper, MainWrapper } from '../components/util';
 
@@ -26,7 +26,7 @@ export default function Home() {
             setProcessingFinished={setProcessingFinished}
           />
         ) : (
-          <Datapage
+          <DataPage
             streamingHistory={streamingHistory}
             userIdentity={userIdentity}
             userData={userData}
