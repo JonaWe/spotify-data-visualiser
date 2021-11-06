@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const KEY_PREFIX = 'VISUALISIFY-';
 
-export default function useLocalStorage(key, initialValue) {
+export default function useLocalStorage<T>(key: string, initialValue: T) {
   const prefixedKey = KEY_PREFIX + key;
 
   const [value, setValue] = useState(initialValue);
