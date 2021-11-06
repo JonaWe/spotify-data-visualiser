@@ -7,32 +7,31 @@ import {
   getWeekYear,
   isSameDay,
 } from 'date-fns';
-import { ar } from 'date-fns/locale';
 import mem from 'mem';
+import {GraphAccuracy} from './Types/GraphAccuracy';
+import HistoryItem from './Types/HistoryItem';
 
-const memorize = (fun) =>
+const memorize = (fun: any) =>
   mem(fun, {
     cacheKey: (arguments_) => JSON.stringify(arguments_),
   });
 
-function getDayYearAndMonth(date) {
+function getDayYearAndMonth(date: Date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-function getYearAndWeek(date) {
+function getYearAndWeek(date: Date) {
   return addWeeks(new Date(getWeekYear(date), 0, 0), getWeek(date) - 1);
 }
 
-function getYearAndMonth(date) {
+function getYearAndMonth(date: Date) {
   return new Date(date.getUTCFullYear(), date.getUTCMonth() + 1, 0);
 }
 
 export default class DataProcessor {
-  constructor(streamingHistory) {
-    this.streamingHistory = streamingHistory;
-  }
+  constructor(private streamingHistory: HistoryItem[]) { }
 
-  getTotalTracksPlayed = memorize((artistFilter, trackFilter) => {
+  getTotalTracksPlayed = memorize((artistFilter: string[], trackFilter: string[]) => {
     if (!artistFilter && !trackFilter) return this.streamingHistory.length;
 
     return this.streamingHistory.reduce((sum, { trackName, artistName }) => {
@@ -113,7 +112,7 @@ export default class DataProcessor {
   });
 
   getMinAndMaxDate = memorize(() => {
-    let minDate, maxDate;
+    let minDate: Date, maxDate: Date;
     this.streamingHistory.forEach(({ endTime }) => {
       const endDate = new Date(endTime);
 
@@ -136,7 +135,7 @@ export default class DataProcessor {
   });
 
   getPlaytimeOverYear = memorize(
-    (artistFilter = [], trackFilter = [], accuracy = 'weeks') => {
+    (artistFilter = [], trackFilter = [], accuracy: GraphAccuracy = 'weeks') => {
       const playtimeOverYear = this._getPlaytimePerDayOverYear(
         artistFilter,
         trackFilter
@@ -145,7 +144,7 @@ export default class DataProcessor {
     }
   );
 
-  _getPlaytimePerDayOverYear = memorize((artistFilter, trackFilter) => {
+  _getPlaytimePerDayOverYear = memorize((artistFilter: string[], trackFilter: string[]) => {
     const dailyActivity = new Map();
     const minDate = this.getMinDate();
     const maxDate = this.getMaxDate();
@@ -177,7 +176,7 @@ export default class DataProcessor {
     }));
   });
 
-  convertToTimeRange = (playtimeOverYear, accuracy) => {
+  convertToTimeRange = (playtimeOverYear: any, accuracy: GraphAccuracy) => {
     if (accuracy === 'weeks') {
       const weeklyActivity = new Map();
       playtimeOverYear.forEach(({ date, hoursPlayed }) => {
@@ -289,7 +288,7 @@ export default class DataProcessor {
     ).sort((a, b) => b.timesSkipped - a.timesSkipped);
   });
 
-  getLongestTrackInSeconds = memorize((artistFilter, trackFilter) => {
+  getLongestTrackInSeconds = memorize((artistFilter: string[], trackFilter: string[]) => {
     return this.streamingHistory.reduce(
       (max, { msPlayed, trackName, artistName }) => {
         if (artistFilter.length !== 0 && !artistFilter.includes(artistName))
@@ -323,7 +322,7 @@ export default class DataProcessor {
   );
 
   _getSongPlaytimeBySeconds = memorize(
-    (artistFilter, trackFilter, LIMIT_IN_SECONDS) => {
+    (artistFilter: string[], trackFilter: string[], LIMIT_IN_SECONDS: number) => {
       function getInitialMap() {
         let initialMap = new Map();
         for (let i = 0; i <= LIMIT_IN_SECONDS; i++) initialMap.set(i, 0);
@@ -377,7 +376,7 @@ export default class DataProcessor {
     }
   );
 
-  convertAccuracy = (songPlaytime, amountOfIntervals, LIMIT_IN_SECONDS) => {
+  convertAccuracy = (songPlaytime: any, amountOfIntervals: any, LIMIT_IN_SECONDS: any) => {
     // const secondsPerInterval = LIMIT_IN_SECONDS / amountOfIntervals;
     return songPlaytime;
   };
