@@ -1,8 +1,11 @@
 import JSZip from 'jszip';
 import Link from 'next/link';
-import { useCallback, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import CustomLoader from '../dataViews/Util/CustomLoader';
+import HistoryItem from '../../../lib/Types/HistoryItem';
+import UserData from '../../../lib/Types/UserData';
+import UserIdentity from '../../../lib/Types/UserIdentity';
+import CustomLoader from '../../dataViews/Util/CustomLoader';
 import {
   DragZone,
   HighlightedCardDescription,
@@ -10,14 +13,21 @@ import {
   UploadCard,
   UploadCardDescription,
   UploadCardTitle,
-} from '../util';
+} from '../../util';
+
+interface FileUploaderProps {
+  setUserData: Dispatch<SetStateAction<UserData>>;
+  setStreamingHistory: Dispatch<SetStateAction<HistoryItem[]>>;
+  setUserIdentity: Dispatch<SetStateAction<UserIdentity>>;
+  setProcessingFinished: Dispatch<SetStateAction<boolean>>;
+}
 
 export default function FileUploader({
   setStreamingHistory,
   setUserIdentity,
-  setUserdata,
+  setUserData,
   setProcessingFinished,
-}) {
+}: FileUploaderProps) {
   const [failed, setFailed] = useState(false);
   const onDrop = useCallback(async ([acceptedFile]) => {
     window.scrollTo(0, 0);
@@ -59,13 +69,13 @@ export default function FileUploader({
 
     if (streamingHistory && (userIdentityPromise || userDataPromise)) {
       if (userIdentity) setUserIdentity(userIdentity);
-      if (userData) setUserdata(userData);
+      if (userData) setUserData(userData);
       setStreamingHistory(streamingHistory);
       setProcessingFinished(true);
     } else {
       setFailed(true);
     }
-  });
+  }, []);
 
   const { getRootProps, getInputProps, acceptedFiles, fileRejections } =
     useDropzone({

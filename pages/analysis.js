@@ -22,7 +22,7 @@ export default function Home() {
           <FileUploader
             setStreamingHistory={setStreamingHistory}
             setUserIdentity={setUserIdentity}
-            setUserdata={setUserdata}
+            setUserData={setUserdata}
             setProcessingFinished={setProcessingFinished}
           />
         ) : (
