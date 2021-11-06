@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Datapage from '../components/pageContents/Datapage';
+import DataPage from '../components/pageContents/DataPage';
 import { getDemoData } from '../lib/getDemoData';
 
 export default function Home({ streamingHistory, userIdentity, userData }) {
