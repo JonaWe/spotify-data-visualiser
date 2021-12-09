@@ -52,6 +52,9 @@ export default function NumberWithUnit({
     default:
       break;
   }
+
+  const suffix = unit === Unit.none ? '' : unit === Unit.ratio ? '%' : unit;
+
   return (
     <Wrapper>
       <Value>
@@ -59,9 +62,7 @@ export default function NumberWithUnit({
           isCounting
           end={value}
           duration={2}
-          suffix={
-            unit === Unit.none ? '' : unit === Unit.ratio ? ' %' : ' ' + unit
-          }
+          formatter={(value) => `${value} ${suffix}`}
           decimalPlaces={
             typeof decimalPlaces !== 'undefined'
               ? decimalPlaces
