@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react';
-import NumberWithUnit from '../util/NumberWithUnit';
+import { useEffect, useState, MutableRefObject } from 'react';
+import DataProcessor from '../../lib/DataProcessor';
+import NumberWithUnit, { Unit } from '../util/NumberWithUnit';
 import CustomLoader from './Util/CustomLoader';
 import { ChartAndTitleWrapper, StatWrapper } from './Util/Util.elements';
 
-export default function UserStats({ dataProcessor, innerRef }) {
+interface UserStatProps {
+  dataProcessor: DataProcessor;
+  innerRef: MutableRefObject<any>;
+}
+
+export default function UserStats({ dataProcessor, innerRef }: UserStatProps) {
   const [tracksSkipped, setTracksSkipped] = useState(null);
   const [tracksPlayed, setTracksPlayed] = useState(null);
   const [totalPlaytime, setTotalPlaytime] = useState(null);
@@ -34,24 +40,24 @@ export default function UserStats({ dataProcessor, innerRef }) {
         <NumberWithUnit
           label="Listening Time"
           value={totalPlaytime}
-          unit="days"
+          unit={Unit.DAYS}
         />
         <NumberWithUnit
           label="Listening Time per Day"
           value={averagePlaytimePerDay}
-          unit="hours"
+          unit={Unit.HOURS}
         />
         <NumberWithUnit
           label="Average Song Playtime"
           value={averageSongPlaytime}
-          unit="minutes"
+          unit={Unit.MINUTES}
         />
         <NumberWithUnit label="Tracks Played" value={tracksPlayed} />
         <NumberWithUnit label="Tracks Skipped" value={tracksSkipped} />
         <NumberWithUnit
           label="Tracks Skipped"
           value={tracksSkipped / tracksPlayed}
-          unit="ratio"
+          unit={Unit.RATIO}
         />
       </StatWrapper>
     </ChartAndTitleWrapper>
