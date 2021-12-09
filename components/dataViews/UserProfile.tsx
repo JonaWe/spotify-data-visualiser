@@ -26,7 +26,15 @@ const UserImage = styled.img`
   height: 150px;
 `;
 
-export default function UserProfile({ userImageUrl, userDisplayName }) {
+interface UserProfileProps {
+  userImageUrl: string;
+  userDisplayName: string;
+}
+
+export default function UserProfile({
+  userImageUrl,
+  userDisplayName,
+}: UserProfileProps) {
   return (
     <ImageWrapper>
       <UserImage src={userImageUrl} alt="Profile Picture" />
