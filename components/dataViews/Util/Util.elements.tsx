@@ -1,5 +1,5 @@
 import { ResponsiveContainer } from 'recharts';
-import styled from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 
 export const CustomToolTipWrapper = styled.div`
   padding: 0.15em 1em;
@@ -28,7 +28,7 @@ export const StatWrapper = styled.div`
   }
 `;
 
-export const timeAmountConverter = (timeInHours) => {
+export const timeAmountConverter = (timeInHours: number) => {
   const seconds = Math.round((((timeInHours % 1) * 60) % 1) * 60);
   const minutes = Math.floor((timeInHours % 1) * 60);
   const hours = Math.floor(timeInHours);
@@ -91,7 +91,7 @@ export const SelectWrapper = styled.div`
   }
 `;
 
-export const getSelectStyles = (theme, minWidth = '200px') => ({
+export const getSelectStyles = (theme: DefaultTheme, minWidth = '200px') => ({
   container: (provided, state) => ({
     ...provided,
     maxWidth: '400px',
@@ -99,7 +99,7 @@ export const getSelectStyles = (theme, minWidth = '200px') => ({
   }),
   menu: (provided) => ({
     ...provided,
-    borderRadius: '0',
+    //borderRadius: '0',
     borderRadius: '5px',
   }),
   menuList: (provided) => ({
@@ -122,7 +122,7 @@ export const getSelectStyles = (theme, minWidth = '200px') => ({
   }),
 });
 
-export const getSelectTheme = (theme) => {
+export const getSelectTheme = (theme: DefaultTheme) => {
   return (t) => ({
     ...t,
     colors: {
