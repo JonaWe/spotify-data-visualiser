@@ -6,10 +6,9 @@ import { ChartAndTitleWrapper, StatWrapper } from './Util/Util.elements';
 
 interface UserStatProps {
   dataProcessor: DataProcessor;
-  innerRef: MutableRefObject<any>;
 }
 
-export default function UserStats({ dataProcessor, innerRef }: UserStatProps) {
+export default function UserStats({ dataProcessor }: UserStatProps) {
   const [tracksSkipped, setTracksSkipped] = useState(null);
   const [tracksPlayed, setTracksPlayed] = useState(null);
   const [totalPlaytime, setTotalPlaytime] = useState(null);
@@ -34,7 +33,7 @@ export default function UserStats({ dataProcessor, innerRef }: UserStatProps) {
     return <CustomLoader />;
   }
   return (
-    <ChartAndTitleWrapper ref={innerRef} id="overview">
+    <ChartAndTitleWrapper id="overview">
       <h2>Overall Stats</h2>
       <StatWrapper>
         <NumberWithUnit

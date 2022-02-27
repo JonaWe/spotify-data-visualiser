@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import DataProcessor from '../../lib/DataProcessor';
+import HistoryItem from '../../lib/Types/HistoryItem';
+import UserData from '../../lib/Types/UserData';
+import UserIdentity from '../../lib/Types/UserIdentity';
 import ActivityPastYear from './Charts/AreaCharts/ActivityPastYear';
 import SongPlaytime from './Charts/AreaCharts/SongPlaytime';
 import TopArtists from './Charts/BarCharts/TopArtists';
@@ -19,11 +22,17 @@ const ChartsWrapper = styled.div`
   margin: 1em 0 5em 0;
 `;
 
+interface DataViewProps {
+  streamingHistory: HistoryItem[];
+  userIdentity?: UserIdentity;
+  userData?: UserData;
+}
+
 export default function dataViews({
   streamingHistory,
   userIdentity,
   userData,
-}) {
+}: DataViewProps) {
   const dataProcessor = new DataProcessor(streamingHistory);
   const userImageUrl =
     userIdentity && userIdentity.largeImageUrl

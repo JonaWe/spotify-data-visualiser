@@ -5,7 +5,7 @@ import CustomLoader from '../../Util/CustomLoader';
 import { ChartAndTitleWrapper, SelectWrapper } from '../../Util/Util.elements';
 import PlaytimeByCategory from './PlaytimeByCategory';
 
-export default function TopTracks({ dataProcessor, innerRef }) {
+export default function TopTracks({ dataProcessor }) {
   const { selectStyles, selectTheme } = useSelectStyles('100px');
   const [maxTracks, SelectElement] = useSingleSelect(10, [10, 25, 50, 100], {
     theme: selectTheme,
@@ -20,7 +20,7 @@ export default function TopTracks({ dataProcessor, innerRef }) {
 
   if (!data) return <CustomLoader />;
   return (
-    <ChartAndTitleWrapper ref={innerRef} id="topTracks">
+    <ChartAndTitleWrapper id="topTracks">
       <h2>Top {maxTracks} Tracks by Playtime</h2>
       <PlaytimeByCategory
         data={data}

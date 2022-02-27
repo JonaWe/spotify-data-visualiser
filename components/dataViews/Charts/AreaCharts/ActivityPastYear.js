@@ -50,7 +50,7 @@ const PastYearActivityTT = ({ active, payload, label, accuracy }) => {
   } else return null;
 };
 
-export default function ActivityPastYear({ dataProcessor, innerRef }) {
+export default function ActivityPastYear({ dataProcessor }) {
   const theme = useContext(ThemeContext);
   const { selectStyles, selectTheme } = useSelectStyles();
 
@@ -95,7 +95,7 @@ export default function ActivityPastYear({ dataProcessor, innerRef }) {
   }
 
   return (
-    <ChartAndTitleWrapper ref={innerRef} id="activityPastYear">
+    <ChartAndTitleWrapper id="activityPastYear">
       <h2>Activity past year</h2>
       <ChartWrapper>
         <AreaChart data={data} margin={{ left: 0, right: 30 }}>

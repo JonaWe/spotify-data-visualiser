@@ -43,7 +43,7 @@ const accuracyOptions = ['Days', 'Weeks', 'Months'].map((value) => ({
   value: value.toLowerCase(),
 }));
 
-export default function SongPlaytime({ dataProcessor, innerRef }) {
+export default function SongPlaytime({ dataProcessor }) {
   const theme = useContext(ThemeContext);
 
   const [artistFilter, setArtistFilter] = useState([]);
@@ -79,7 +79,7 @@ export default function SongPlaytime({ dataProcessor, innerRef }) {
   const selectStyles = getSelectStyles(theme);
 
   return (
-    <ChartAndTitleWrapper ref={innerRef} id="songPlaytime">
+    <ChartAndTitleWrapper id="songPlaytime">
       <h2>Song Playtime</h2>
       <ChartWrapper>
         <AreaChart data={data} margin={{ left: 0, right: 30 }}>

@@ -42,7 +42,6 @@ const WeekdayActivityTT = ({ active, payload, label, totalDays }) => {
 export default function WeekdayRadar({
   dataProcessor,
   angleOffset = (360 / 7) * 1,
-  innerRef,
 }) {
   const theme = useContext(ThemeContext);
   const [data, setData] = useState(null);
@@ -58,7 +57,7 @@ export default function WeekdayRadar({
   }
 
   return (
-    <ChartAndTitleWrapper ref={innerRef} id="weekdayRadar">
+    <ChartAndTitleWrapper id="weekdayRadar">
       <h2>Listening Activity related to Weekday</h2>
       <ChartWrapper>
         <RadarChart
