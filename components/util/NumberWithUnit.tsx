@@ -1,4 +1,4 @@
-import { CountUp } from 'use-count-up';
+import CountUp from 'react-countup';
 import { Label, Value, Wrapper } from './NumberWithUnits.elements';
 import {
   msToDays,
@@ -9,18 +9,18 @@ import {
 
 export enum Unit {
   NONE,
-  SECONDS,
-  MINUTES,
-  HOURS,
-  DAYS,
-  RATIO,
+  SECONDS = ' seconds',
+  MINUTES = ' minutes',
+  HOURS = ' hours',
+  DAYS = ' days',
+  RATIO = '%',
 }
 
 interface NumberWithUnitProps {
   unit?: Unit;
   value: number;
   label: string;
-  decimalPlaces?: number;
+  decimalPlaces: number;
 }
 
 export default function NumberWithUnit({
@@ -55,23 +55,17 @@ export default function NumberWithUnit({
   }
 
   const suffix = unit === Unit.NONE ? '' : unit === Unit.RATIO ? '%' : unit;
-  decimalPlaces =
-    typeof decimalPlaces !== 'undefined'
-      ? decimalPlaces
-      : unit === Unit.NONE
-      ? 0
-      : 2;
 
   return (
     <Wrapper>
       <Value>
         <CountUp
-          isCounting
           end={value}
-          duration={2}
-          formatter={(value) => `${value} ${suffix}`}
-          decimalPlaces={decimalPlaces}
-          thousandsSeparator=","
+          duration={1}
+          separator=" "
+          suffix={`${suffix}`}
+          decimals={decimalPlaces}
+          decimal="."
         />
       </Value>
       <Label>{label}</Label>

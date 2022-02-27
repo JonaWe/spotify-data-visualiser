@@ -41,23 +41,35 @@ export default function UserStats({ dataProcessor, innerRef }: UserStatProps) {
           label="Listening Time"
           value={totalPlaytime}
           unit={Unit.DAYS}
+          decimalPlaces={1}
         />
         <NumberWithUnit
           label="Listening Time per Day"
           value={averagePlaytimePerDay}
           unit={Unit.HOURS}
+          decimalPlaces={1}
         />
         <NumberWithUnit
           label="Average Song Playtime"
           value={averageSongPlaytime}
           unit={Unit.MINUTES}
+          decimalPlaces={1}
         />
-        <NumberWithUnit label="Tracks Played" value={tracksPlayed} />
-        <NumberWithUnit label="Tracks Skipped" value={tracksSkipped} />
+        <NumberWithUnit
+          label="Tracks Played"
+          value={tracksPlayed}
+          decimalPlaces={0}
+        />
+        <NumberWithUnit
+          label="Tracks Skipped"
+          value={tracksSkipped}
+          decimalPlaces={0}
+        />
         <NumberWithUnit
           label="Tracks Skipped"
           value={tracksSkipped / tracksPlayed}
           unit={Unit.RATIO}
+          decimalPlaces={1}
         />
       </StatWrapper>
     </ChartAndTitleWrapper>
