@@ -1,7 +1,8 @@
+import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Button, CenterdGridWrapper, MainWrapper } from '../components/util';
+import { Button, CenteredGridWrapper, MainWrapper } from '../components/util';
 
 const Heading = styled.h1`
   font-size: 4em;
@@ -25,15 +26,15 @@ export default function FourOFour() {
       <Head>
         <title>404 - Page not Found</title>
       </Head>
-      <CenterdGridWrapper style={{ minHeight: 'inherit' }}>
-        <CenterdGridWrapper>
+      <CenteredGridWrapper style={{ minHeight: 'inherit' }}>
+        <CenteredGridWrapper>
           <Heading>404</Heading>
           <SubHeading>Page not Found</SubHeading>
           <Link href="/">
             <Button primary>Home</Button>
           </Link>
-        </CenterdGridWrapper>
-      </CenterdGridWrapper>
+        </CenteredGridWrapper>
+      </CenteredGridWrapper>
     </MainWrapper>
   );
 }

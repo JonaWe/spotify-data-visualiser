@@ -3,7 +3,7 @@ import Link from 'next/link';
 import DataViews from '../dataViews';
 import {
   Button,
-  CenterdGridWrapper,
+  CenteredGridWrapper,
   MainContent,
   MainWrapper,
   Title,
@@ -28,7 +28,7 @@ export default function DataPage({
   }, []);
   return (
     <MainWrapper>
-      <CenterdGridWrapper>
+      <CenteredGridWrapper>
         <Title>Your Spotify Stats for the Past Year</Title>
         <MainContent>
           <DataViews
@@ -40,7 +40,7 @@ export default function DataPage({
         <Link href="/">
           <Button primary>Go Home</Button>
         </Link>
-      </CenterdGridWrapper>
+      </CenteredGridWrapper>
     </MainWrapper>
   );
 }

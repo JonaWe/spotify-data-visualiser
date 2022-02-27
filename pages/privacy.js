@@ -3,7 +3,7 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import {
   Button,
-  CenterdGridWrapper,
+  CenteredGridWrapper,
   MainWrapper,
   Title,
 } from '../components/util';
@@ -33,7 +33,7 @@ export default function Home() {
       <Head>
         <title>Visualisify - Privacy</title>
       </Head>
-      <CenterdGridWrapper>
+      <CenteredGridWrapper>
         <Title>Privacy</Title>
         <TextWrapper>
           <Text>
@@ -62,7 +62,7 @@ export default function Home() {
         <Link href="/analysis">
           <Button primary>Back to Analysis</Button>
         </Link>
-      </CenterdGridWrapper>
+      </CenteredGridWrapper>
     </MainWrapper>
   );
 }

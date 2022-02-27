@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardTitle,
   CardWrapper,
-  CenterdGridWrapper,
+  CenteredGridWrapper,
   MainWrapper,
   Title,
 } from '../components/util';
@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <MainWrapper>
       <Title>Spotify User Data Visualizer</Title>
-      <CenterdGridWrapper>
+      <CenteredGridWrapper>
         <CardWrapper>
           <Card>
             <CardTitle>Step 1</CardTitle>
@@ -57,7 +57,7 @@ export default function Home() {
             <Button primary>View Demodata</Button>
           </Link>
         </div>
-      </CenterdGridWrapper>
+      </CenteredGridWrapper>
     </MainWrapper>
   );
 }

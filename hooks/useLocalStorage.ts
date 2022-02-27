@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 const KEY_PREFIX = 'VISUALISIFY-';
 
-export default function useLocalStorage<T>(key: string, initialValue: T) {
+export default function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, Dispatch<SetStateAction<T>>] {
   const prefixedKey = KEY_PREFIX + key;
 
   const [value, setValue] = useState(initialValue);

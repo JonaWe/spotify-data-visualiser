@@ -1,3 +1,4 @@
+import type { AppProps } from 'next/app';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
@@ -17,10 +18,10 @@ const META_DATA = {
   image_URL: 'https://www.visualisify.live/images/preview.png',
 };
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState(darkTheme);
   const [darkMode, setDarkMode] = useLocalStorage('darkModeActive', true);
-  const [buttonIcon, setButtonIcon] = useState(FaSun);
+  const [buttonIcon, setButtonIcon] = useState(() => FaSun);
 
   useEffect(() => {
     setTheme(darkMode ? darkTheme : lightTheme);

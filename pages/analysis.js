@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import DataPage from '../components/pageContents/DataPage';
 import FileUploader from '../components/pageContents/FileUploader';
-import { CenterdGridWrapper, MainWrapper } from '../components/util';
+import { CenteredGridWrapper, MainWrapper } from '../components/util';
 
 export default function Home() {
   const [streamingHistory, setStreamingHistory] = useState([]);
@@ -17,7 +17,7 @@ export default function Home() {
           processingFinished ? 'My Stats' : 'Upload Data'
         }`}</title>
       </Head>
-      <CenterdGridWrapper>
+      <CenteredGridWrapper>
         {!processingFinished ? (
           <FileUploader
             setStreamingHistory={setStreamingHistory}
@@ -32,7 +32,7 @@ export default function Home() {
             userData={userData}
           />
         )}
-      </CenterdGridWrapper>
+      </CenteredGridWrapper>
     </MainWrapper>
   );
 }

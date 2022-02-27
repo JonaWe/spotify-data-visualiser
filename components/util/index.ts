@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
+interface ButtonProps {
+  primary?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
   display: inline-block;
   font: inherit;
   font-weight: 500;
@@ -37,7 +41,7 @@ export const Title = styled.h1`
   margin: 0;
 `;
 
-export const CenterdGridWrapper = styled.div`
+export const CenteredGridWrapper = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
@@ -117,7 +121,11 @@ export const UploadCardDescription = styled.p`
   }
 `;
 
-export const HighlightedCardDescription = styled.span`
+interface HighlightedCardDescriptionProps {
+  warning?: boolean;
+}
+
+export const HighlightedCardDescription = styled.span<HighlightedCardDescriptionProps>`
   color: ${(props) =>
     props.warning ? props.theme.dangerColor : props.theme.fcPrimary};
 `;
