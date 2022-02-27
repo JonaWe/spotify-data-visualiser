@@ -1,8 +1,21 @@
 import Head from 'next/head';
 import DataPage from '../components/pageContents/DataPage';
 import { getDemoData } from '../lib/getDemoData';
+import HistoryItem from '../lib/Types/HistoryItem';
+import UserData from '../lib/Types/UserData';
+import UserIdentity from '../lib/Types/UserIdentity';
 
-export default function Home({ streamingHistory, userIdentity, userData }) {
+interface DemoPageProps {
+  streamingHistory: HistoryItem[];
+  userIdentity?: UserIdentity;
+  userData?: UserData;
+}
+
+export default function Home({
+  streamingHistory,
+  userIdentity,
+  userData,
+}: DemoPageProps) {
   return (
     <>
       <Head>
@@ -17,7 +30,8 @@ export default function Home({ streamingHistory, userIdentity, userData }) {
   );
 }
 
-export async function getStaticProps() {
+// TODO fix any type for getStaticProps
+export const getStaticProps: any = async () => {
   const demoData = getDemoData();
   return {
     props: {
@@ -26,4 +40,4 @@ export async function getStaticProps() {
       userData: { username: 'Username' },
     },
   };
-}
+};
